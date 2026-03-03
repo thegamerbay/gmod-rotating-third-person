@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,10 +26,11 @@ jobs:
           cat addon.json
 
       - name: Publish to Steam Workshop
-        uses: vurvdev/gmod-upload@v1
+        uses: vurvdev/gmod-upload@master
         with:
           id: '1620191091'
           config: 'addon.json'
+          changelog: "New release published via GitHub Actions"
         env:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
