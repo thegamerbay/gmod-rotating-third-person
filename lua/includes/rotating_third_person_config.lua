@@ -1,35 +1,28 @@
-RTP_DEFAULT_ADDON_ENABLED = "1"
-RTP_DEFAULT_CAMERA_FORWARD = "50"
-RTP_DEFAULT_CAMERA_RIGHT = "20"
-RTP_DEFAULT_CAMERA_UP = "-10"
-RTP_DEFAULT_CAMERA_FOV = "75"
-RTP_DEFAULT_CAMERA_FOV_CHANGE_SPEED = "1"
-RTP_DEFAULT_CAMERA_DISABLE_ROTATION_WHEN_MOVE = "1"
-RTP_DEFAULT_PLAYER_ROTATION_SPEED = "3"
-RTP_DEFAULT_PLAYER_AIMING_BUTTON = "108"
-RTP_DEFAULT_CROSSHAIR_HIDDEN_IF_NOT_AIMING = "0"
-RTP_DEFAULT_CROSSHAIR_TRACE_POSITION = "0"
+RTP_VARS = {
+    ENABLED = CreateClientConVar("rtp_enabled", "1", true, false),
+    CAM_FORWARD = CreateClientConVar("rtp_camera_forward", "50", true, false),
+    CAM_RIGHT = CreateClientConVar("rtp_camera_right", "20", true, false),
+    CAM_UP = CreateClientConVar("rtp_camera_up", "-10", true, false),
+    CAM_FOV = CreateClientConVar("rtp_camera_fov", "75", true, false),
+    FOV_SPEED = CreateClientConVar("rtp_camera_fov_change_speed", "2", true, false),
+    ROT_SPEED = CreateClientConVar("rtp_player_rotation_speed", "5", true, false),
+    AIM_BUTTON = CreateClientConVar("rtp_player_aiming_button", "108", true, false),
+    HIDE_CROSSHAIR = CreateClientConVar("rtp_crosshair_hidden_if_not_aiming", "0", true, false),
+    INVERT_Y = CreateClientConVar("rtp_invert_y", "0", true, false),
+    TOGGLE_AIM = CreateClientConVar("rtp_toggle_aim", "0", true, false),
+    SMART_SCOPE = CreateClientConVar("rtp_smart_scope", "1", true, false, "Auto-disable in sniper scopes"),
+    ZOOM_FOV = CreateClientConVar("rtp_camera_zoom_fov", "15", true, false)
+}
 
-RTP_VAR_ADDON_ENABLED = "rotating_third_person_addon_enabled"
-RTP_VAR_CAMERA_FORWARD = "rotating_third_person_camera_forward"
-RTP_VAR_CAMERA_RIGHT = "rotating_third_person_camera_right"
-RTP_VAR_CAMERA_UP = "rotating_third_person_camera_up"
-RTP_VAR_CAMERA_FOV = "rotating_third_person_camera_fov"
-RTP_VAR_CAMERA_FOV_CHANGE_SPEED = "rotating_third_person_camera_fov_change_speed"
-RTP_VAR_CAMERA_DISABLE_ROTATION_WHEN_MOVE = "rotating_third_person_camera_disable_rotation_when_move"
-RTP_VAR_PLAYER_ROTATION_SPEED = "rotating_third_person_player_rotation_speed"
-RTP_VAR_PLAYER_AIMING_BUTTON = "rotating_third_person_player_aiming_button"
-RTP_VAR_CROSSHAIR_HIDDEN_IF_NOT_AIMING  = "rotating_third_person_crosshair_hidden_if_not_aiming"
-RTP_VAR_CROSSHAIR_TRACE_POSITION = "rotating_third_person_crosshair_trace_position"
+-- Convenient command for binding (bind x rtp_toggle)
+concommand.Add("rtp_toggle", function()
+    local current = RTP_VARS.ENABLED:GetBool()
+    RunConsoleCommand("rtp_enabled", current and "0" or "1")
+    surface.PlaySound("garrysmod/ui_click.wav")
+end)
 
-CreateClientConVar( RTP_VAR_ADDON_ENABLED, RTP_DEFAULT_ADDON_ENABLED, true, false )
-CreateClientConVar( RTP_VAR_CAMERA_FORWARD, RTP_DEFAULT_CAMERA_FORWARD, true, false )
-CreateClientConVar( RTP_VAR_CAMERA_RIGHT, RTP_DEFAULT_CAMERA_RIGHT, true, false )
-CreateClientConVar( RTP_VAR_CAMERA_UP, RTP_DEFAULT_CAMERA_UP, true, false )
-CreateClientConVar( RTP_VAR_CAMERA_FOV, RTP_DEFAULT_CAMERA_FOV, true, false )
-CreateClientConVar( RTP_VAR_CAMERA_FOV_CHANGE_SPEED, RTP_DEFAULT_CAMERA_FOV_CHANGE_SPEED, true, false )
-CreateClientConVar( RTP_VAR_CAMERA_DISABLE_ROTATION_WHEN_MOVE, RTP_DEFAULT_CAMERA_DISABLE_ROTATION_WHEN_MOVE, true, false )
-CreateClientConVar( RTP_VAR_PLAYER_ROTATION_SPEED, RTP_DEFAULT_PLAYER_ROTATION_SPEED, true, false )
-CreateClientConVar( RTP_VAR_PLAYER_AIMING_BUTTON, RTP_DEFAULT_PLAYER_AIMING_BUTTON, true, false )
-CreateClientConVar( RTP_VAR_CROSSHAIR_HIDDEN_IF_NOT_AIMING, RTP_DEFAULT_CROSSHAIR_HIDDEN_IF_NOT_AIMING, true, false )
-CreateClientConVar( RTP_VAR_CROSSHAIR_TRACE_POSITION, RTP_DEFAULT_CROSSHAIR_TRACE_POSITION, true, false )
+-- Command to switch shoulder
+concommand.Add("rtp_switch_shoulder", function()
+    local current = RTP_VARS.CAM_RIGHT:GetInt()
+    RunConsoleCommand("rtp_camera_right", tostring(-current))
+end)
