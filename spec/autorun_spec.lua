@@ -17,6 +17,9 @@ describe("Rotating Third Person Autorun Logic", function()
         -- Clear RTP global
         _G.RTP = nil
 
+        -- Load config manually since include is mocked
+        dofile("lua/includes/rotating_third_person_config.lua")
+
         -- Load the main file bypassing SERVER checks
         _G.SERVER = false
         dofile("lua/autorun/rotating_third_person.lua")
