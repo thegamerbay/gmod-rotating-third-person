@@ -29,7 +29,14 @@ _G.GetConVar = function(name)
     -- For tests, we mock what's needed for the specific test scope.
     return {
         GetInt = function() return 0 end,
-        GetBool = function() return false end
+        GetBool = function() return false end,
+        GetFloat = function()
+            if name == "sensitivity" then return 3 end
+            if name == "m_yaw" then return 0.022 end
+            if name == "m_pitch" then return 0.022 end
+            if name == "fov_desired" then return 90 end
+            return 0
+        end
     }
 end
 

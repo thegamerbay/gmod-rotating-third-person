@@ -83,6 +83,25 @@ describe("Rotating Third Person Autorun Logic", function()
         assert.is_true(RTP.State.CameraAngles.pitch < startPitch)
     end)
 
+    it("should scale mouse input according to player ConVar settings", function()
+        local ply = LocalPlayer()
+        hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
+
+        -- Force known starting angles and FOV
+        RTP.State.CameraAngles = Angle(0, 0, 0)
+        RTP.State.CameraFOV = 90
+
+        local cmd = { SetViewAngles = spy.new(function() end) }
+
+        -- With mouse x=100, y=100
+        -- deltaX = 100 * 0.022 (m_yaw) * 3 (sens) * 1 (fovScale) = 6.6
+        -- deltaY = 100 * 0.022 (m_pitch) * 3 (sens) * 1 (fovScale) = 6.6
+        hooks["InputMouseApply"](cmd, 100, 100, Angle(0,0,0))
+
+        assert.are.equal(-6.6, RTP.State.CameraAngles.yaw)
+        assert.are.equal(6.6, RTP.State.CameraAngles.pitch)
+    end)
+
     it("should correct movement vectors during CreateMove", function()
         local ply = LocalPlayer()
         hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init

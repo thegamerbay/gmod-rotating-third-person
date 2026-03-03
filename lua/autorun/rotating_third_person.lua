@@ -54,6 +54,12 @@ local function UpdateAimState()
     end
 end
 
+-- Cache ConVars outside the hook for maximum performance
+local cv_sens = GetConVar("sensitivity")
+local cv_yaw = GetConVar("m_yaw")
+local cv_pitch = GetConVar("m_pitch")
+local cv_fov_desired = GetConVar("fov_desired")
+
 -- Handle mouse input for camera rotation
 hook.Add("InputMouseApply", "RTP.InputMouseApply", function(cmd, x, y, ang)
     local ply = LocalPlayer()
@@ -63,10 +69,22 @@ hook.Add("InputMouseApply", "RTP.InputMouseApply", function(cmd, x, y, ang)
     UpdateAimState()
 
     local invert = RTP_VARS.INVERT_Y:GetBool() and -1 or 1
-    local fovScale = RTP.State.CameraFOV / 90 -- Decrease sensitivity when zoomed in
+    
+    -- Get current player settings
+    local sens = cv_sens and cv_sens:GetFloat() or 3
+    local m_yaw = cv_yaw and cv_yaw:GetFloat() or 0.022
+    local m_pitch = cv_pitch and cv_pitch:GetFloat() or 0.022
+    local defaultFOV = cv_fov_desired and cv_fov_desired:GetFloat() or 90
 
-    RTP.State.CameraAngles.yaw = RTP.State.CameraAngles.yaw - (x * 0.02 * fovScale)
-    RTP.State.CameraAngles.pitch = math.Clamp(RTP.State.CameraAngles.pitch + (y * 0.02 * invert * fovScale), -89, 89)
+    -- Correct FOV scaling relative to player settings, not a constant
+    local fovScale = RTP.State.CameraFOV / defaultFOV 
+
+    -- Calculate final deltas considering sensitivity and axis multipliers
+    local deltaX = x * m_yaw * sens * fovScale
+    local deltaY = y * m_pitch * sens * fovScale * invert
+
+    RTP.State.CameraAngles.yaw = RTP.State.CameraAngles.yaw - deltaX
+    RTP.State.CameraAngles.pitch = math.Clamp(RTP.State.CameraAngles.pitch + deltaY, -89, 89)
 
     -- If aiming, the player looks in the same direction as the camera
     if RTP.State.IsAiming then
