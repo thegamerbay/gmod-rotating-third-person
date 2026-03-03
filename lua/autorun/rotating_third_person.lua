@@ -69,7 +69,7 @@ hook.Add("InputMouseApply", "RTP.InputMouseApply", function(cmd, x, y, ang)
     UpdateAimState()
 
     local invert = RTP_VARS.INVERT_Y:GetBool() and -1 or 1
-    
+
     -- Get current player settings
     local sens = cv_sens and cv_sens:GetFloat() or 3
     local m_yaw = cv_yaw and cv_yaw:GetFloat() or 0.022
@@ -77,7 +77,7 @@ hook.Add("InputMouseApply", "RTP.InputMouseApply", function(cmd, x, y, ang)
     local defaultFOV = cv_fov_desired and cv_fov_desired:GetFloat() or 90
 
     -- Correct FOV scaling relative to player settings, not a constant
-    local fovScale = RTP.State.CameraFOV / defaultFOV 
+    local fovScale = RTP.State.CameraFOV / defaultFOV
 
     -- Calculate final deltas considering sensitivity and axis multipliers
     local deltaX = x * m_yaw * sens * fovScale
