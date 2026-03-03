@@ -25,8 +25,8 @@ jobs:
           cat addon.json
 
       - name: Publish to Steam Workshop
-        uses: Earu/gmod-workshop-action@v1
+        uses: Earu/GSW-action@v2
         with:
-          addon_id: 1620191091
-          steam_username: ${{ secrets.STEAM_USERNAME }}
-          steam_password: ${{ secrets.STEAM_PASSWORD }}
+          workshop-id: 1620191091
+          account-name: ${{ secrets.STEAM_USERNAME }}
+          account-password: ${{ secrets.STEAM_PASSWORD }}
