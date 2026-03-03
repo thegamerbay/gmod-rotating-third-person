@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -15,45 +15,20 @@ jobs:
       - name: Update Addon Title with Version
         run: |
           # The system variable GITHUB_REF_NAME contains the name of the pushed tag (e.g., v1.0.0)
-          $VERSION = $env:GITHUB_REF_NAME
-          Write-Host "Appending version $VERSION to addon.json title..."
+          export VERSION=${GITHUB_REF_NAME}
+          echo "Appending version $VERSION to addon.json title..."
           
-          # Use PowerShell to update the title field and overwrite the file
-          $json = Get-Content addon.json -Raw | ConvertFrom-Json
-          $json.title = "$($json.title) $VERSION"
-          $json | ConvertTo-Json -Depth 10 | Set-Content addon.json
+          # Use jq to update the title field and overwrite the file
+          jq ".title = .title + \" $VERSION\"" addon.json > addon_tmp.json && mv addon_tmp.json addon.json
           
           # Output the result to logs for verification
-          Get-Content addon.json
-
-      - name: Bootstrap SteamCMD
-        continue-on-error: true
-        run: |
-          Invoke-WebRequest -Uri "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip" -OutFile "steamcmd.zip"
-          Expand-Archive -Path "steamcmd.zip" -DestinationPath "steamcmd"
-          
-          # SteamCMD often exits with code 1 on its very first run while self-updating.
-          # We run it once and ignore the error so it can fully update itself.
-          .\steamcmd\steamcmd.exe +quit
-
-      - name: Download GMod Publishing Tools
-        run: |
-          # Now that SteamCMD is completely installed and updated, run the actual command.
-          # We use the provided account credentials instead of anonymous to bypass "Missing configuration" errors for App 4020.
-          .\steamcmd\steamcmd.exe +force_install_dir "..\gmod" +login ${{ secrets.STEAM_USERNAME }} ${{ secrets.STEAM_PASSWORD }} +app_update 4020 validate +quit
-          
-          # Copy the needed executables and DLLs to the workspace root
-          Copy-Item "steamcmd\steamcmd.exe" -Destination "."
-          Copy-Item "..\gmod\bin\gmpublish.exe" -Destination "." -ErrorAction SilentlyContinue
-          Copy-Item "..\gmod\bin\steam_api.dll" -Destination "." -ErrorAction SilentlyContinue
-          Copy-Item "..\gmod\bin\steam_appid.txt" -Destination "." -ErrorAction SilentlyContinue
-          Copy-Item "..\gmod\bin\tier0.dll" -Destination "." -ErrorAction SilentlyContinue
-          Copy-Item "..\gmod\bin\vstdlib.dll" -Destination "." -ErrorAction SilentlyContinue
+          cat addon.json
 
       - name: Publish to Steam Workshop
-        uses: Earu/GSW-action@V3.0
+        uses: vurvdev/gmod-upload@v1
         with:
-          workshop-id: '1620191091'
-          account-name: ${{ secrets.STEAM_USERNAME }}
-          account-password: ${{ secrets.STEAM_PASSWORD }}
-          addon-path: ${{ env.GITHUB_WORKSPACE }}
+          id: '1620191091'
+          config: 'addon.json'
+        env:
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
