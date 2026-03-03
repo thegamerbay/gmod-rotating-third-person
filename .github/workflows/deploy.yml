@@ -13,24 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update Addon Title with Version
-        run: |
-          # The system variable GITHUB_REF_NAME contains the name of the pushed tag (e.g., v1.0.0)
-          export VERSION=${GITHUB_REF_NAME}
-          echo "Appending version $VERSION to addon.json title..."
-          
-          # Use jq to update the title field and overwrite the file
-          jq ".title = .title + \" $VERSION\"" addon.json > addon_tmp.json && mv addon_tmp.json addon.json
-          
-          # Output the result to logs for verification
-          cat addon.json
-
       - name: Publish to Steam Workshop
         uses: vurvdev/gmod-upload@master
         with:
           id: '1620191091'
           config: 'addon.json'
-          changelog: "New release published via GitHub Actions"
+          changelog: "New release published via GitHub Actions. Version ${{ github.ref_name }}. See changes: https://github.com/thegamerbay/gmod-rotating-third-person/releases/tag/${{ github.ref_name }}"
         env:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
