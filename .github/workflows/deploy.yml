@@ -1,0 +1,32 @@
+name: Deploy to Steam Workshop
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' # Run only when creating tags like v1.0.0
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update Addon Title with Version
+        run: |
+          # The system variable GITHUB_REF_NAME contains the name of the pushed tag (e.g., v1.0.0)
+          export VERSION=${GITHUB_REF_NAME}
+          echo "Appending version $VERSION to addon.json title..."
+          
+          # Use jq to update the title field and overwrite the file
+          jq ".title = .title + \" $VERSION\"" addon.json > addon_tmp.json && mv addon_tmp.json addon.json
+          
+          # Output the result to logs for verification
+          cat addon.json
+
+      - name: Publish to Steam Workshop
+        uses: Earu/gmod-workshop-action@v1
+        with:
+          addon_id: 1620191091
+          steam_username: ${{ secrets.STEAM_USERNAME }}
+          steam_password: ${{ secrets.STEAM_PASSWORD }}
