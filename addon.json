@@ -12,6 +12,10 @@
     "LICENSE",
     "README.md",
     "materials/icon/*",
-    "spec/*"
+    "spec/*",
+    ".github/*",
+    ".luacheckrc",
+    ".luacov",
+    "luacov.report.out"
   ]
 }

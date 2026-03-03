@@ -1,0 +1,40 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Lua
+        uses: leafo/gh-actions-lua@v10.4.0
+        with:
+          luaVersion: "5.1.5"
+
+      - name: Setup Luarocks
+        uses: leafo/gh-actions-luarocks@v4.3.0
+
+      - name: Install dependencies
+        run: |
+          luarocks install busted
+          luarocks install luassert
+          luarocks install luacov
+          luarocks install luacov-reporter-lcov
+
+      - name: Run Tests with Coverage
+        run: busted -c spec/
+
+      - name: Generate Coverage Report
+        run: luacov -r lcov
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: luacov.report.out
+          token: ${{ secrets.CODECOV_TOKEN }}
