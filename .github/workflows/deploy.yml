@@ -26,6 +26,11 @@ jobs:
           # Output the result to logs for verification
           Get-Content addon.json
 
+      - name: Setup SteamCMD
+        run: |
+          Invoke-WebRequest -Uri "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip" -OutFile "steamcmd.zip"
+          Expand-Archive -Path "steamcmd.zip" -DestinationPath "."
+
       - name: Publish to Steam Workshop
         uses: Earu/GSW-action@V3.0
         with:
