@@ -39,7 +39,8 @@ jobs:
       - name: Download GMod Publishing Tools
         run: |
           # Now that SteamCMD is completely installed and updated, run the actual command.
-          .\steamcmd\steamcmd.exe +force_install_dir "..\gmod" +login anonymous +app_update 4020 validate +quit
+          # We use the provided account credentials instead of anonymous to bypass "Missing configuration" errors for App 4020.
+          .\steamcmd\steamcmd.exe +force_install_dir "..\gmod" +login ${{ secrets.STEAM_USERNAME }} ${{ secrets.STEAM_PASSWORD }} +app_update 4020 validate +quit
           
           # Copy the needed executables and DLLs to the workspace root
           Copy-Item "steamcmd\steamcmd.exe" -Destination "."
