@@ -1,14 +1,17 @@
 {
-  "title"	:	"Third Person Rotating Camera",
-  "type"	:	"tool",
-  "tags"	:	["scenic", "roleplay"],
-  "ignore"	:
-  [
+  "title": "Third Person Rotating Camera",
+  "type": "tool",
+  "tags": [
+    "scenic",
+    "roleplay"
+  ],
+  "ignore": [
     ".idea/*",
     ".git/*",
     ".gitignore",
     "LICENSE",
     "README.md",
-    "materials/icon/*"
+    "materials/icon/*",
+    "spec/*"
   ]
 }

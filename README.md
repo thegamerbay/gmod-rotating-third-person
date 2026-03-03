@@ -72,6 +72,25 @@ For server owners or power users, all variables can be configured via the consol
 
 ---
 
+## 🧪 Developer Testing (Busted)
+
+To ensure high-quality script stability without launching the game, this project has been fully instrumented with the **Busted** Lua testing framework. Garry's Mod APIs are safely mocked in `spec/helpers/gmod_mocks.lua`.
+
+**Prerequisites:**
+You will need [Lua](https://www.lua.org/) and [LuaRocks](https://luarocks.org/) installed on your machine.
+```bash
+# Install busted via luarocks
+luarocks install busted
+```
+
+**Running Tests:**
+Navigate to the addon's root directory and run:
+```bash
+busted
+```
+
+---
+
 ## 🛠️ Credits & Feedback
 
 * **Inspiration:** Camera mechanics from *Haydee*.
