@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="128" height="128">
+  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>Third Person Rotating Camera</h1>
   <p><b>A highly customizable over-the-shoulder camera for Garry's Mod, inspired by Haydee.</b></p>
   
