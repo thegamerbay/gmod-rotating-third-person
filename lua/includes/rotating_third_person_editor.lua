@@ -167,7 +167,7 @@ end
 
 local function ResetSettings()
     RunConsoleCommand( "rtp_enabled", "1" )
-    
+
     RunConsoleCommand( "rtp_camera_forward", "50" )
     Editor.PANEL.CamDistance.textEntry:SetValue( 50 )
     Editor.PANEL.CamDistance.textEntry.OnTextChanged()
@@ -236,7 +236,9 @@ local function DrawCheckBox( labelText, variable )
 end
 
 local function DrawCheckboxes()
-    Editor.PANEL.IsCrosshairHiddenIfNotAiming = DrawCheckBox( "Hide crosshair if not aiming", "rtp_crosshair_hidden_if_not_aiming" )
+    Editor.PANEL.IsCrosshairHiddenIfNotAiming = DrawCheckBox(
+        "Hide crosshair if not aiming", "rtp_crosshair_hidden_if_not_aiming"
+    )
     Editor.PANEL.IsToggleAim = DrawCheckBox( "Toggle Aim", "rtp_toggle_aim" )
     Editor.PANEL.IsSmartScope = DrawCheckBox( "Smart Scope (disable in sniper)", "rtp_smart_scope" )
     Editor.PANEL.IsInvertY = DrawCheckBox( "Invert Y-Axis", "rtp_invert_y" )

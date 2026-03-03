@@ -4,6 +4,8 @@
 SERVER = false
 CLIENT = true
 
+local spy = require("luassert.spy")
+
 -- Mock Globals
 _G.CreateClientConVar = function(name, default, save, userdata, helptext)
     local convar = {
@@ -63,9 +65,9 @@ local VectorMeta = {}
 VectorMeta.__index = VectorMeta
 function VectorMeta.__add(a, b) return Vector(a.x + b.x, a.y + b.y, a.z + b.z) end
 function VectorMeta.__sub(a, b) return Vector(a.x - b.x, a.y - b.y, a.z - b.z) end
-function VectorMeta.__mul(a, b) 
+function VectorMeta.__mul(a, b)
     if type(b) == "number" then return Vector(a.x * b, a.y * b, a.z * b) end
-    return Vector(a.x * b.x, a.y * b.y, a.z * b.z) 
+    return Vector(a.x * b.x, a.y * b.y, a.z * b.z)
 end
 function VectorMeta:Length2D() return math.sqrt(self.x * self.x + self.y * self.y) end
 function VectorMeta:Angle() return Angle(0,0,0) end

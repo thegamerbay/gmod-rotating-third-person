@@ -32,7 +32,7 @@ end
 local function IsAddonActive(ply)
     if not RTP_VARS.ENABLED:GetBool() then return false end
     if not IsValid(ply) or not ply:Alive() or ply:InVehicle() then return false end
-    
+
     -- Smart Scope: if FOV is significantly narrowed (sniper scope), disable third person view
     if RTP_VARS.SMART_SCOPE:GetBool() and ply:GetFOV() < 50 then return false end
 
@@ -89,11 +89,11 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
         -- Calculate movement direction relative to camera angle
         local moveAng = moveDir:Angle()
         local targetYaw = RTP.State.CameraAngles.yaw + moveAng.yaw
-        
+
         -- Smoothly rotate the player model towards the movement direction
         local rotSpeed = RTP_VARS.ROT_SPEED:GetInt()
         RTP.State.PlayerAngles.yaw = math.ApproachAngle(RTP.State.PlayerAngles.yaw, targetYaw, rotSpeed)
-        
+
         -- Correct movement to follow the camera direction
         local fwd = RTP.State.CameraAngles:Forward()
         local right = RTP.State.CameraAngles:Right()
@@ -120,7 +120,9 @@ hook.Add("CalcView", "RTP.CalcView", function(ply, origin, angles, fov)
     -- Trace to prevent the camera from clipping through walls
     local tr = util.TraceHull({
         start = origin,
-        endpos = origin - (RTP.State.CameraAngles:Forward() * camFwd) + (RTP.State.CameraAngles:Right() * camRight) + (RTP.State.CameraAngles:Up() * camUp),
+        endpos = origin - (RTP.State.CameraAngles:Forward() * camFwd)
+            + (RTP.State.CameraAngles:Right() * camRight)
+            + (RTP.State.CameraAngles:Up() * camUp),
         filter = ply,
         mins = Vector(-4, -4, -4),
         maxs = Vector(4, 4, 4),
@@ -147,7 +149,8 @@ hook.Add("ShouldDrawLocalPlayer", "RTP.DrawPlayer", function(ply)
 end)
 
 hook.Add("HUDShouldDraw", "RTP.HideCrosshair", function(name)
-    if name == "CHudCrosshair" and IsAddonActive(LocalPlayer()) and RTP_VARS.HIDE_CROSSHAIR:GetBool() and not RTP.State.IsAiming then
+    if name == "CHudCrosshair" and IsAddonActive(LocalPlayer()) and
+       RTP_VARS.HIDE_CROSSHAIR:GetBool() and not RTP.State.IsAiming then
         return false
     end
 end)

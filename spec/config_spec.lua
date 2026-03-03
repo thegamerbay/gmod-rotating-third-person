@@ -2,7 +2,7 @@ require("busted.runner")()
 local spy = require("luassert.spy")
 
 describe("Rotating Third Person Configs", function()
-    
+
     before_each(function()
         -- Reset global mock spies
         require("spec.helpers.gmod_mocks")
@@ -26,12 +26,12 @@ describe("Rotating Third Person Configs", function()
     it("should register rtp_toggle command", function()
         dofile("lua/includes/rotating_third_person_config.lua")
         assert.is_not_nil(concommand["rtp_toggle"])
-        
+
         -- Default enabled to disabled
         concommand.rtp_toggle()
         assert.spy(_G.RunConsoleCommand).was.called_with("rtp_enabled", "0")
         assert.spy(_G.surface.PlaySound).was.called()
-        
+
         -- Disabled to enabled
         _G.RunConsoleCommand:clear()
         RTP_VARS.ENABLED.value = "0"
@@ -42,7 +42,7 @@ describe("Rotating Third Person Configs", function()
     it("should register rtp_switch_shoulder command", function()
         dofile("lua/includes/rotating_third_person_config.lua")
         assert.is_not_nil(concommand["rtp_switch_shoulder"])
-        
+
         -- Switch to left
         RTP_VARS.CAM_RIGHT.value = "20"
         concommand.rtp_switch_shoulder()
