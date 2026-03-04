@@ -109,9 +109,11 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
     -- should always aim exactly where the camera is looking.
     if RTP_VARS.DISABLE_ROT_WHEN_MOVE:GetBool() and not RTP.State.IsAiming then
         local rotSpeed = RTP_VARS.ROT_SPEED:GetInt()
-        RTP.State.PlayerAngles.yaw = math.ApproachAngle(RTP.State.PlayerAngles.yaw, RTP.State.CameraAngles.yaw, rotSpeed)
+        RTP.State.PlayerAngles.yaw = math.ApproachAngle(
+            RTP.State.PlayerAngles.yaw, RTP.State.CameraAngles.yaw, rotSpeed
+        )
         RTP.State.PlayerAngles.pitch = RTP.State.CameraAngles.pitch
-        
+
         -- Movement works normally without manual overrides in classic mode
         return
     end
