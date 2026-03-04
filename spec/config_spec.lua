@@ -22,6 +22,7 @@ describe("Rotating Third Person Configs", function()
         assert.is_true(RTP_VARS.SMART_SCOPE:GetBool())
         assert.are.equal(15, RTP_VARS.ZOOM_FOV:GetInt())
         assert.is_false(RTP_VARS.DISABLE_ROT_WHEN_MOVE:GetBool())
+        assert.is_false(RTP_VARS.TRACE_CROSSHAIR:GetBool())
     end)
 
     it("should register rtp_toggle command", function()

@@ -199,6 +199,11 @@ local function ResetSettings()
     RunConsoleCommand( "rtp_crosshair_hidden_if_not_aiming", "0" )
     Editor.PANEL.IsCrosshairHiddenIfNotAiming:SetValue( false )
 
+    RunConsoleCommand( "rtp_crosshair_trace_position", "0" )
+    if Editor.PANEL.IsTraceCrosshairPosition then
+        Editor.PANEL.IsTraceCrosshairPosition:SetValue( false )
+    end
+
     -- New vars
     RunConsoleCommand( "rtp_toggle_aim", "0" )
     Editor.PANEL.IsToggleAim:SetValue( false )
@@ -243,6 +248,9 @@ end
 local function DrawCheckboxes()
     Editor.PANEL.IsCrosshairHiddenIfNotAiming = DrawCheckBox(
         "Hide crosshair if not aiming", "rtp_crosshair_hidden_if_not_aiming"
+    )
+    Editor.PANEL.IsTraceCrosshairPosition = DrawCheckBox( 
+        "Trace crosshair position", "rtp_crosshair_trace_position" 
     )
     Editor.PANEL.IsToggleAim = DrawCheckBox( "Toggle Aim", "rtp_toggle_aim" )
     Editor.PANEL.IsSmartScope = DrawCheckBox( "Smart Scope (disable in sniper)", "rtp_smart_scope" )

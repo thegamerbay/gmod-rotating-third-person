@@ -160,4 +160,43 @@ describe("Rotating Third Person Autorun Logic", function()
         assert.is_true(RTP.State.CameraFOV < 90)
     end)
 
+    it("should hide default crosshair when trace crosshair is enabled", function()
+        _G.RTP_VARS.TRACE_CROSSHAIR.value = "1"
+        
+        local shouldDraw = hooks["HUDShouldDraw"]("CHudCrosshair")
+        assert.is_false(shouldDraw)
+    end)
+
+    it("should hide default crosshair when trace is disabled but hide setting is active outside of aiming", function()
+        _G.RTP_VARS.TRACE_CROSSHAIR.value = "0"
+        _G.RTP_VARS.HIDE_CROSSHAIR.value = "1"
+        RTP.State.IsAiming = false
+        
+        local shouldDraw = hooks["HUDShouldDraw"]("CHudCrosshair")
+        assert.is_false(shouldDraw)
+    end)
+
+    it("should draw custom trace crosshair when enabled", function()
+        _G.RTP_VARS.TRACE_CROSSHAIR.value = "1"
+        _G.RTP_VARS.HIDE_CROSSHAIR.value = "0"
+        
+        _G.surface = _G.surface or {}
+        _G.surface.SetDrawColor = spy.new(function() end)
+        _G.surface.DrawLine = spy.new(function() end)
+        
+        _G.util = _G.util or {}
+        _G.util.TraceLine = function() 
+            return { HitPos = { ToScreen = function() return {x=100, y=100} end } } 
+        end
+        
+        local ply = LocalPlayer()
+        ply.GetShootPos = function() return Vector(0,0,0) end
+        ply.GetAimVector = function() return Vector(1,0,0) end
+
+        hooks["HUDPaint"]()
+        
+        assert.spy(_G.surface.SetDrawColor).was.called()
+        assert.spy(_G.surface.DrawLine).was.called(4)
+    end)
+
 end)
