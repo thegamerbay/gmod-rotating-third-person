@@ -29,6 +29,7 @@ Whether you're engaging in sandbox play or exploring maps, this addon offers unp
 * **Toggle Aim:** Prefer not to hold the aim button? Enable Toggle Aim in the settings for single-click aiming.
 * **Invert Y-Axis Support:** Built-in axis inversion for players who prefer traditional flight-stick style pitch control.
 * **Shoulder Switching:** Quickly swap your camera from the right shoulder to the left shoulder with a single command.
+* **Dynamic Crosshair Tracing:** Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space.
 * **Extensive Customization:** Manage your camera's X, Y, and Z offsets, FOV, and speeds seamlessly via the Garry's Mod Context Menu.
 
 ---
@@ -75,6 +76,7 @@ For server owners or power users, all variables can be configured via the consol
 | `rtp_invert_y` | Inverts the vertical mouse pitch rotation. | `0` |
 | `rtp_crosshair_hidden_if_not_aiming` | Hides the default crosshair while not aiming. | `0` |
 | `rtp_classic_movement_mode` | Enables Classic movement mode: locks model rotation to camera direction. | `0` |
+| `rtp_crosshair_trace_position` | Draws a custom dynamic crosshair showing true bullet trajectory. | `0` |
 
 ---
 
