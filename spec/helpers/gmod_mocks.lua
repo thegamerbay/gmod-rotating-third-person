@@ -60,6 +60,9 @@ _G.math.ApproachAngle = function(cur, target, inc)
     -- Simplified approach angle for tests
     return target
 end
+_G.math.NormalizeAngle = function(ang)
+    return ang % 360
+end
 
 _G.Lerp = function(t, a, b)
     return a + (b - a) * t

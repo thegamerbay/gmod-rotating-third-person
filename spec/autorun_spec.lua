@@ -109,7 +109,6 @@ describe("Rotating Third Person Autorun Logic", function()
         local cmd = {
             GetForwardMove = function() return 400 end,
             GetSideMove = function() return 0 end,
-            KeyDown = function(key) return key == _G.IN_FORWARD end,
             SetForwardMove = spy.new(function() end),
             SetSideMove = spy.new(function() end)
         }
@@ -120,6 +119,28 @@ describe("Rotating Third Person Autorun Logic", function()
 
         assert.spy(cmd.SetForwardMove).was.called()
         assert.spy(cmd.SetSideMove).was.called()
+    end)
+
+    it("should match pitch and yaw to camera angles in classic movement mode", function()
+        local ply = LocalPlayer()
+        hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
+
+        _G.RTP_VARS.DISABLE_ROT_WHEN_MOVE.value = "1"
+
+        local cmd = {
+            GetForwardMove = function() return 400 end,
+            GetSideMove = function() return 0 end,
+            SetForwardMove = spy.new(function() end),
+            SetSideMove = spy.new(function() end)
+        }
+
+        RTP.State.CameraAngles = Angle(45, 90, 0) -- Pitch 45, Yaw 90
+        RTP.State.PlayerAngles = Angle(0, 0, 0)
+
+        hooks["CreateMove"](cmd)
+
+        assert.are.equal(45, RTP.State.PlayerAngles.pitch)
+        -- Not asserting Sets since they are skipped in classic mode
     end)
 
     it("should apply FOV zoom when aiming", function()

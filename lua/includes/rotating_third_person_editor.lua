@@ -208,6 +208,11 @@ local function ResetSettings()
 
     RunConsoleCommand( "rtp_invert_y", "0" )
     Editor.PANEL.IsInvertY:SetValue( false )
+
+    RunConsoleCommand( "rtp_classic_movement_mode", "0" )
+    if Editor.PANEL.IsDisableRotWhenMove then
+        Editor.PANEL.IsDisableRotWhenMove:SetValue( false )
+    end
 end
 
 local function DrawResetButton()
@@ -242,6 +247,7 @@ local function DrawCheckboxes()
     Editor.PANEL.IsToggleAim = DrawCheckBox( "Toggle Aim", "rtp_toggle_aim" )
     Editor.PANEL.IsSmartScope = DrawCheckBox( "Smart Scope (disable in sniper)", "rtp_smart_scope" )
     Editor.PANEL.IsInvertY = DrawCheckBox( "Invert Y-Axis", "rtp_invert_y" )
+    Editor.PANEL.IsDisableRotWhenMove = DrawCheckBox( "Classic movement mode (fixed to camera)", "rtp_classic_movement_mode" )
 end
 
 local function DrawEditor( window )

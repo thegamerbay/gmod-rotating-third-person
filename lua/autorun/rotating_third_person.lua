@@ -100,29 +100,38 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
     local ply = LocalPlayer()
     if not IsAddonActive(ply) or not RTP.State.Initialized then return end
 
-    local moveDir = Vector(cmd:GetForwardMove(), cmd:GetSideMove(), 0)
+    -- Important: Invert SideMove. In GMod +SideMove is right,
+    -- but for the Angle() method a positive Y is left.
+    local moveDir = Vector(cmd:GetForwardMove(), -cmd:GetSideMove(), 0)
     local isMoving = moveDir:Length2D() > 0
 
-    if isMoving and not RTP.State.IsAiming then
-        -- Calculate movement direction relative to camera angle
-        local moveAng = moveDir:Angle()
-        local targetYaw = RTP.State.CameraAngles.yaw + moveAng.yaw
+    -- Classic Mode Override: When classic movement is enabled, the player model
+    -- should always aim exactly where the camera is looking.
+    if RTP_VARS.DISABLE_ROT_WHEN_MOVE:GetBool() and not RTP.State.IsAiming then
+        local rotSpeed = RTP_VARS.ROT_SPEED:GetInt()
+        RTP.State.PlayerAngles.yaw = math.ApproachAngle(RTP.State.PlayerAngles.yaw, RTP.State.CameraAngles.yaw, rotSpeed)
+        RTP.State.PlayerAngles.pitch = RTP.State.CameraAngles.pitch
+        
+        -- Movement works normally without manual overrides in classic mode
+        return
+    end
 
-        -- Smoothly rotate the player model towards the movement direction
+    if isMoving and not RTP.State.IsAiming then
+        -- Calculate target movement angle relative to the camera
+        local moveAng = moveDir:Angle()
+        local targetYaw = math.NormalizeAngle(RTP.State.CameraAngles.yaw + moveAng.yaw)
+
+        -- Smoothly rotate the player model
         local rotSpeed = RTP_VARS.ROT_SPEED:GetInt()
         RTP.State.PlayerAngles.yaw = math.ApproachAngle(RTP.State.PlayerAngles.yaw, targetYaw, rotSpeed)
 
-        -- Correct movement to follow the camera direction
-        local fwd = RTP.State.CameraAngles:Forward()
-        local right = RTP.State.CameraAngles:Right()
-        fwd.z = 0 right.z = 0
-        fwd:Normalize() right:Normalize()
+        -- Convert desired movement from world coordinates
+        -- to local coordinates of the current model rotation.
+        local speed = moveDir:Length2D()
+        local diffYaw = math.rad(targetYaw - RTP.State.PlayerAngles.yaw)
 
-        local inputFwd = (cmd:KeyDown(IN_FORWARD) and 1 or 0) - (cmd:KeyDown(IN_BACK) and 1 or 0)
-        local inputRight = (cmd:KeyDown(IN_MOVERIGHT) and 1 or 0) - (cmd:KeyDown(IN_MOVELEFT) and 1 or 0)
-
-        cmd:SetForwardMove(inputFwd * 400)
-        cmd:SetSideMove(inputRight * 400)
+        cmd:SetForwardMove(math.cos(diffYaw) * speed)
+        cmd:SetSideMove(-math.sin(diffYaw) * speed)
     end
 end)
 
