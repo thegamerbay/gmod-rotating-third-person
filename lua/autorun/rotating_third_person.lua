@@ -203,12 +203,12 @@ end
 hook.Add("HUDShouldDraw", "RTP.HideCrosshair", function(name)
     if name == "CHudCrosshair" and IsAddonActive(LocalPlayer()) then
         -- Hide standard crosshair if custom trace is enabled
-        if RTP_VARS.TRACE_CROSSHAIR:GetBool() then 
-            return false 
+        if RTP_VARS.TRACE_CROSSHAIR:GetBool() then
+            return false
         end
         -- Or if the setting to hide crosshair outside aiming is enabled
-        if RTP_VARS.HIDE_CROSSHAIR:GetBool() and not RTP.State.IsAiming then 
-            return false 
+        if RTP_VARS.HIDE_CROSSHAIR:GetBool() and not RTP.State.IsAiming then
+            return false
         end
     end
 end)
@@ -218,7 +218,7 @@ hook.Add("HUDPaint", "RTP.DrawCustomCrosshair", function()
     if IsAddonActive(LocalPlayer()) and RTP_VARS.TRACE_CROSSHAIR:GetBool() then
         -- Check if crosshair should be hidden outside aiming mode
         local isHideCrosshair = RTP_VARS.HIDE_CROSSHAIR:GetBool()
-        
+
         if not isHideCrosshair or RTP.State.IsAiming then
             DrawTraceCrossHair()
         end

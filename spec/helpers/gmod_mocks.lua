@@ -110,7 +110,9 @@ _G.LocalPlayer = function()
         GetFOV = function() return 90 end,
         Crouching = function() return false end,
         EyePos = function() return Vector(0,0,64) end,
-        EyeAngles = function() return Angle(0,0,0) end
+        EyeAngles = function() return Angle(0,0,0) end,
+        GetShootPos = function() return Vector(0,0,64) end,
+        GetAimVector = function() return Vector(1,0,0) end
     }
 end
 _G.IsValid = function(ent) return ent ~= nil end

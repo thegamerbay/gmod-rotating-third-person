@@ -249,8 +249,8 @@ local function DrawCheckboxes()
     Editor.PANEL.IsCrosshairHiddenIfNotAiming = DrawCheckBox(
         "Hide crosshair if not aiming", "rtp_crosshair_hidden_if_not_aiming"
     )
-    Editor.PANEL.IsTraceCrosshairPosition = DrawCheckBox( 
-        "Trace crosshair position", "rtp_crosshair_trace_position" 
+    Editor.PANEL.IsTraceCrosshairPosition = DrawCheckBox(
+        "Trace crosshair position", "rtp_crosshair_trace_position"
     )
     Editor.PANEL.IsToggleAim = DrawCheckBox( "Toggle Aim", "rtp_toggle_aim" )
     Editor.PANEL.IsSmartScope = DrawCheckBox( "Smart Scope (disable in sniper)", "rtp_smart_scope" )
