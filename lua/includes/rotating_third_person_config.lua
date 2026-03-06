@@ -13,7 +13,7 @@ RTP_VARS = {
     SMART_SCOPE = CreateClientConVar("rtp_smart_scope", "1", true, false, "Auto-disable in sniper scopes"),
     ZOOM_FOV = CreateClientConVar("rtp_camera_zoom_fov", "15", true, false),
     DISABLE_ROT_WHEN_MOVE = CreateClientConVar("rtp_classic_movement_mode", "0", true, false),
-    TRACE_CROSSHAIR = CreateClientConVar("rtp_crosshair_trace_position", "0", true, false)
+    TRACE_CROSSHAIR = CreateClientConVar("rtp_crosshair_trace_position", "1", true, false)
 }
 
 -- Convenient command for binding (bind x rtp_toggle)

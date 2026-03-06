@@ -240,9 +240,9 @@ local function ResetSettings()
     RunConsoleCommand( "rtp_crosshair_hidden_if_not_aiming", "0" )
     Editor.PANEL.IsCrosshairHiddenIfNotAiming:SetValue( false )
 
-    RunConsoleCommand( "rtp_crosshair_trace_position", "0" )
+    RunConsoleCommand( "rtp_crosshair_trace_position", "1" )
     if Editor.PANEL.IsTraceCrosshairPosition then
-        Editor.PANEL.IsTraceCrosshairPosition:SetValue( false )
+        Editor.PANEL.IsTraceCrosshairPosition:SetValue( true )
     end
 
     -- New variables
