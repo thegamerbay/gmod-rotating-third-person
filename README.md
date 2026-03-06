@@ -19,7 +19,7 @@
 
 ## 📖 Overview
 
-The **Third Person Rotating Camera** is a professional Garry's Mod addon that completely overhauls the game's default third-person perspective. Designed identically after the camera mechanics from the game *Haydee*, this mod aims to deliver a precise, responsive, and highly customizable over-the-shoulder camera system.
+The **Third Person Rotating Camera** is a Garry's Mod addon that completely overhauls the game's default third-person perspective. Designed identically after the camera mechanics from the game *Haydee*, this mod aims to deliver a precise, responsive, and highly customizable over-the-shoulder camera system.
 
 Whether you're engaging in sandbox play or exploring maps, this addon offers unparalleled control over your viewing angles to maximize your gameplay experience.
 
