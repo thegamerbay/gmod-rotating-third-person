@@ -26,25 +26,25 @@ function CustomTooltip:PositionTooltip()
         return
     end
     self:PerformLayout()
-    
+
     local x, y = gui.MousePos()
     local w, h = self:GetSize()
-    
+
     x = x + 15
     y = y + 15
-    
+
     if x + w > ScrW() then x = ScrW() - w end
     if y + h > ScrH() then y = ScrH() - h end
     if x < 0 then x = 0 end
     if y < 0 then y = 0 end
-    
+
     self:SetPos( x, y )
 end
 vgui.Register( "rtp_custom_tooltip", CustomTooltip, "DTooltip" )
 
 local function AddHelpIcon( parent, x, y, tooltipKey )
     if not tooltipKey then return end
-    
+
     local icon = parent:Add( "DImage" )
     icon:SetPos( x, y )
     icon:SetSize( 16, 16 )
@@ -52,7 +52,7 @@ local function AddHelpIcon( parent, x, y, tooltipKey )
     icon:SetTooltip( language.GetPhrase( tooltipKey ) )
     icon:SetTooltipPanelOverride( "rtp_custom_tooltip" )
     icon:SetMouseInputEnabled( true ) -- Required so DImage can trigger tooltips
-    
+
     return icon
 end
 
@@ -170,7 +170,9 @@ local function DrawScratchBlock( labelKey, min, max, variable, tooltipKey )
 end
 
 local function DrawDistanceSettings()
-    Editor.PANEL.CamDistance = DrawScratchBlock( "rtp_ui_cam_distance", 0, 1000, "rtp_camera_forward", "rtp_tip_cam_distance" )
+    Editor.PANEL.CamDistance = DrawScratchBlock(
+        "rtp_ui_cam_distance", 0, 1000, "rtp_camera_forward", "rtp_tip_cam_distance"
+    )
 end
 
 local function DrawUpSettings()
@@ -278,7 +280,7 @@ end
 
 local function DrawCheckBox( labelKey, variable, tooltipKey )
     local yOffset = getNewElementYOffset()
-    
+
     local checkBox = Editor.PANEL.Settings:Add( "DCheckBoxLabel" )
     checkBox:SetPos( 8, yOffset + 6 )
     checkBox:SetText( language.GetPhrase( labelKey ) )
