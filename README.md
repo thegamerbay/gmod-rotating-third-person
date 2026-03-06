@@ -50,6 +50,8 @@ Customize the camera in real-time without typing any commands!
 4. Set your preferred Aiming button (default is Right Mouse Button).
 5. Enable or disable new features like Toggle Aim, Smart Scope, and Invert Y-Axis directly via checkboxes.
 
+![Settings Menu](assets/settings.jpg)
+
 ### Quick Keybinds
 You can bind useful functions directly in the developer console (`~`):
 
