@@ -31,6 +31,7 @@ Whether you're engaging in sandbox play or exploring maps, this addon offers unp
 * **Shoulder Switching:** Quickly swap your camera from the right shoulder to the left shoulder with a single command.
 * **Dynamic Crosshair Tracing:** Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space.
 * **Extensive Customization:** Manage your camera's X, Y, and Z offsets, FOV, and speeds seamlessly via the Garry's Mod Context Menu.
+* **Full Localization Support (31 Languages):** Enjoy high-quality native UI translations and context-aware help tooltips for every setting.
 
 ---
 

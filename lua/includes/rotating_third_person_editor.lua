@@ -1,4 +1,4 @@
-local PANEL_WIDTH = 300
+local PANEL_WIDTH = 350
 local PANEL_HEIGHT = 500
 local PANEL_TITLE = "Third Person Rotating Camera"
 local ELEMENTS_HEIGHT = 30
@@ -17,6 +17,43 @@ local function getNewElementYOffset()
     local newOffset = Editor.newElementYOffset
     Editor.newElementYOffset = newOffset + ELEMENTS_HEIGHT
     return newOffset
+end
+
+local CustomTooltip = {}
+function CustomTooltip:PositionTooltip()
+    if not IsValid(self.TargetPanel) then
+        self:Remove()
+        return
+    end
+    self:PerformLayout()
+    
+    local x, y = gui.MousePos()
+    local w, h = self:GetSize()
+    
+    x = x + 15
+    y = y + 15
+    
+    if x + w > ScrW() then x = ScrW() - w end
+    if y + h > ScrH() then y = ScrH() - h end
+    if x < 0 then x = 0 end
+    if y < 0 then y = 0 end
+    
+    self:SetPos( x, y )
+end
+vgui.Register( "rtp_custom_tooltip", CustomTooltip, "DTooltip" )
+
+local function AddHelpIcon( parent, x, y, tooltipKey )
+    if not tooltipKey then return end
+    
+    local icon = parent:Add( "DImage" )
+    icon:SetPos( x, y )
+    icon:SetSize( 16, 16 )
+    icon:SetImage( "icon16/help.png" )
+    icon:SetTooltip( language.GetPhrase( tooltipKey ) )
+    icon:SetTooltipPanelOverride( "rtp_custom_tooltip" )
+    icon:SetMouseInputEnabled( true ) -- Required so DImage can trigger tooltips
+    
+    return icon
 end
 
 local function DrawPanel( window )
@@ -53,10 +90,10 @@ end
 
 local function UpdateEnableButton()
     if Editor.enableToggle then
-        Editor.PANEL.EnableThird:SetText( "Disable Third Person" )
+        Editor.PANEL.EnableThird:SetText( language.GetPhrase( "rtp_ui_disable_btn" ) )
         Editor.PANEL.EnableThird:SetTextColor( Color( 150, 0, 0) )
     else
-        Editor.PANEL.EnableThird:SetText( "Enable Third Person" )
+        Editor.PANEL.EnableThird:SetText( language.GetPhrase( "rtp_ui_enable_btn" ) )
         Editor.PANEL.EnableThird:SetTextColor( Color( 0, 150 ,0 ) )
     end
 end
@@ -65,7 +102,7 @@ local function DrawEnableButton()
     Editor.PANEL.EnableThird = Editor.PANEL.Settings:Add( "DButton" )
     Editor.PANEL.EnableThird:SizeToContents()
     Editor.PANEL.EnableThird:SetPos( 10, getNewElementYOffset() + 3 )
-    Editor.PANEL.EnableThird:SetSize( 250, 20 )
+    Editor.PANEL.EnableThird:SetSize( 300, 20 )
 
     UpdateEnableButton()
     Editor.PANEL.EnableThird.DoClick = function()
@@ -85,7 +122,7 @@ end
 
 local function addScratchTextEntry( value, offset )
     local textEntry = Editor.PANEL.Settings:Add( "DTextEntry" )
-    textEntry:SetPos( 110 , offset )
+    textEntry:SetPos( 160 , offset )
     textEntry:SetValue( value )
     textEntry:SetSize( 40, 20 )
     textEntry:SetNumeric( true )
@@ -95,7 +132,7 @@ end
 
 local function addNumberScratch( min, max, value, offset )
     local numberScratch = Editor.PANEL.Settings:Add( "DNumberScratch" )
-    numberScratch:SetPos( 155, offset + 2 )
+    numberScratch:SetPos( 205, offset + 2 )
     numberScratch:SetValue( value )
     numberScratch:SetMin( min )
     numberScratch:SetMax( max )
@@ -103,13 +140,15 @@ local function addNumberScratch( min, max, value, offset )
     return numberScratch
 end
 
-local function DrawScratchBlock( labelText, min, max, variable )
+local function DrawScratchBlock( labelKey, min, max, variable, tooltipKey )
     local yOffset = getNewElementYOffset()
     local value = GetConVar( variable ):GetInt()
 
-    local label = addScratchLabel( labelText, yOffset )
+    local label = addScratchLabel( language.GetPhrase( labelKey ), yOffset )
     local textEntry = addScratchTextEntry( value, yOffset )
     local numberScratch = addNumberScratch( min, max, value, yOffset )
+
+    AddHelpIcon( Editor.PANEL.Settings, 305, yOffset + 4, tooltipKey )
 
     textEntry.OnTextChanged = function()
         local newValue = textEntry:GetValue()
@@ -131,23 +170,23 @@ local function DrawScratchBlock( labelText, min, max, variable )
 end
 
 local function DrawDistanceSettings()
-    Editor.PANEL.CamDistance = DrawScratchBlock( "Camera Distance: ", 0, 1000, "rtp_camera_forward" )
+    Editor.PANEL.CamDistance = DrawScratchBlock( "rtp_ui_cam_distance", 0, 1000, "rtp_camera_forward", "rtp_tip_cam_distance" )
 end
 
 local function DrawUpSettings()
-    Editor.PANEL.CamUp = DrawScratchBlock( "Camera Up: ", -50, 50, "rtp_camera_up" )
+    Editor.PANEL.CamUp = DrawScratchBlock( "rtp_ui_cam_up", -50, 50, "rtp_camera_up", "rtp_tip_cam_up" )
 end
 
 local function DrawRightSettings()
-    Editor.PANEL.CamRight = DrawScratchBlock( "Camera Right: ", -100, 100, "rtp_camera_right" )
+    Editor.PANEL.CamRight = DrawScratchBlock( "rtp_ui_cam_right", -100, 100, "rtp_camera_right", "rtp_tip_cam_right" )
 end
 
 local function DrawFovSettings()
-    Editor.PANEL.CamFov = DrawScratchBlock( "Camera FOV: ", 30, 110, "rtp_camera_fov" )
+    Editor.PANEL.CamFov = DrawScratchBlock( "rtp_ui_cam_fov", 30, 110, "rtp_camera_fov", "rtp_tip_cam_fov" )
 end
 
 local function DrawZoomFovSettings()
-    Editor.PANEL.ZoomFov = DrawScratchBlock( "Zoom FOV Amount: ", 0, 90, "rtp_camera_zoom_fov" )
+    Editor.PANEL.ZoomFov = DrawScratchBlock( "rtp_ui_zoom_fov", 0, 90, "rtp_camera_zoom_fov", "rtp_tip_zoom_fov" )
 end
 
 local function DrawAimingBinder()
@@ -155,14 +194,16 @@ local function DrawAimingBinder()
 
     local label = Editor.PANEL.Settings:Add( "DLabel" )
     label:SetPos( 10, offset + 5 )
-    label:SetText( 'Aiming button: ' )
+    label:SetText( language.GetPhrase( "rtp_ui_aiming_btn" ) )
     label:SizeToContents()
 
     Editor.PANEL.AimingBinder = Editor.PANEL.Settings:Add( "DBinder" )
-    Editor.PANEL.AimingBinder:SetPos( 110, offset + 3 )
-    Editor.PANEL.AimingBinder:SetSize( 150, 20 )
+    Editor.PANEL.AimingBinder:SetPos( 160, offset + 3 )
+    Editor.PANEL.AimingBinder:SetSize( 140, 20 )
     Editor.PANEL.AimingBinder:SetConVar( "rtp_player_aiming_button" )
     Editor.PANEL.AimingBinder:SetValue( GetConVar( "rtp_player_aiming_button" ):GetInt() )
+
+    AddHelpIcon( Editor.PANEL.Settings, 305, offset + 5, "rtp_tip_aiming_btn" )
 end
 
 local function ResetSettings()
@@ -204,7 +245,7 @@ local function ResetSettings()
         Editor.PANEL.IsTraceCrosshairPosition:SetValue( false )
     end
 
-    -- New vars
+    -- New variables
     RunConsoleCommand( "rtp_toggle_aim", "0" )
     Editor.PANEL.IsToggleAim:SetValue( false )
 
@@ -225,9 +266,9 @@ local function DrawResetButton()
     Editor.PANEL.ResetButton:SizeToContents()
 
     Editor.PANEL.ResetButton:SetPos( 10, getNewElementYOffset() + 3 )
-    Editor.PANEL.ResetButton:SetSize( 250, 20 )
+    Editor.PANEL.ResetButton:SetSize( 300, 20 )
 
-    Editor.PANEL.ResetButton:SetText( "Reset Settings" )
+    Editor.PANEL.ResetButton:SetText( language.GetPhrase( "rtp_ui_reset_btn" ) )
     Editor.PANEL.ResetButton:SetTextColor( Color( 150, 0, 0) )
 
     Editor.PANEL.ResetButton.DoClick = function()
@@ -235,28 +276,42 @@ local function DrawResetButton()
     end
 end
 
-local function DrawCheckBox( labelText, variable )
+local function DrawCheckBox( labelKey, variable, tooltipKey )
+    local yOffset = getNewElementYOffset()
+    
     local checkBox = Editor.PANEL.Settings:Add( "DCheckBoxLabel" )
-    checkBox:SetPos( 8, getNewElementYOffset() + 6 )
-    checkBox:SetText( labelText )
+    checkBox:SetPos( 8, yOffset + 6 )
+    checkBox:SetText( language.GetPhrase( labelKey ) )
     checkBox:SetConVar( variable )
     checkBox:SetValue( GetConVar( variable ):GetBool() )
+
+    if tooltipKey then
+        AddHelpIcon( Editor.PANEL.Settings, 305, yOffset + 6, tooltipKey )
+        checkBox:SetTooltip( language.GetPhrase( tooltipKey ) )
+        checkBox:SetTooltipPanelOverride( "rtp_custom_tooltip" )
+    end
 
     return checkBox
 end
 
 local function DrawCheckboxes()
     Editor.PANEL.IsCrosshairHiddenIfNotAiming = DrawCheckBox(
-        "Hide crosshair if not aiming", "rtp_crosshair_hidden_if_not_aiming"
+        "rtp_ui_hide_crosshair", "rtp_crosshair_hidden_if_not_aiming", "rtp_tip_hide_crosshair"
     )
     Editor.PANEL.IsTraceCrosshairPosition = DrawCheckBox(
-        "Trace crosshair position", "rtp_crosshair_trace_position"
+        "rtp_ui_trace_crosshair", "rtp_crosshair_trace_position", "rtp_tip_trace_crosshair"
     )
-    Editor.PANEL.IsToggleAim = DrawCheckBox( "Toggle Aim", "rtp_toggle_aim" )
-    Editor.PANEL.IsSmartScope = DrawCheckBox( "Smart Scope (disable in sniper)", "rtp_smart_scope" )
-    Editor.PANEL.IsInvertY = DrawCheckBox( "Invert Y-Axis", "rtp_invert_y" )
+    Editor.PANEL.IsToggleAim = DrawCheckBox(
+        "rtp_ui_toggle_aim", "rtp_toggle_aim", "rtp_tip_toggle_aim"
+    )
+    Editor.PANEL.IsSmartScope = DrawCheckBox(
+        "rtp_ui_smart_scope", "rtp_smart_scope", "rtp_tip_smart_scope"
+    )
+    Editor.PANEL.IsInvertY = DrawCheckBox(
+        "rtp_ui_invert_y", "rtp_invert_y", "rtp_tip_invert_y"
+    )
     Editor.PANEL.IsDisableRotWhenMove = DrawCheckBox(
-        "Classic movement mode (fixed to camera)", "rtp_classic_movement_mode"
+        "rtp_ui_classic_mode", "rtp_classic_movement_mode", "rtp_tip_classic_mode"
     )
 end
 
