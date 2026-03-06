@@ -176,3 +176,11 @@ _G.Color = function(r,g,b,a) return {r=r,g=g,b=b,a=a} end
 
 _G.AddCSLuaFile = spy.new(function() end)
 _G.include = spy.new(function() end)
+
+_G.language = {
+    GetPhrase = function(key) return key end
+}
+
+_G.gui = {
+    MousePos = function() return 100, 100 end
+}
