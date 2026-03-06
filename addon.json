@@ -6,16 +6,18 @@
     "roleplay"
   ],
   "ignore": [
-    ".idea/*",
-    ".git/*",
+    ".idea/**/*",
+    ".git/**/*",
     ".gitignore",
     "LICENSE",
     "README.md",
-    "materials/icon/*",
-    "spec/*",
-    ".github/*",
+    "materials/icon/**/*",
+    "spec/**/*",
+    ".github/**/*",
     ".luacheckrc",
     ".luacov",
-    "luacov.report.out"
+    "luacov.report.out",
+    "assets/**/*",
+    "addon.json"
   ]
 }
