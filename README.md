@@ -1,3 +1,5 @@
+> 🌐 **Languages:** [English](README.md) | [Русский](README.ru.md) | [ไทย](README.th.md) | [简体中文](README.zh-CN.md)
+
 <div align="center">
   <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>Third Person Rotating Camera</h1>
