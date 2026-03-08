@@ -12,6 +12,7 @@
     "LICENSE",
     "README.md",
     "README.*.md",
+    "steam_description.md",
     "materials/icon/**/*",
     "spec/**/*",
     "./spec/config_spec.lua",

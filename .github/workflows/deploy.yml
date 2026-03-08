@@ -14,11 +14,15 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Publish to Steam Workshop
-        uses: vurvdev/gmod-upload@master
+        uses: thegamerbay/gmod-workshop-upload@v1
         with:
           id: '1620191091'
           config: 'addon.json'
+          title: 'Third Person Rotating Camera'
+          description_file: 'steam_description.md'
           changelog: "New release published via GitHub Actions. Version ${{ github.ref_name }}. See changes: https://github.com/thegamerbay/gmod-rotating-third-person/releases/tag/${{ github.ref_name }}"
+          previewfile: 'materials/icon/rotating_third_person.jpg'
+          visibility: '0'
         env:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
