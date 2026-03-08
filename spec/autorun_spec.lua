@@ -57,7 +57,7 @@ describe("Rotating Third Person Autorun Logic", function()
         local ply = LocalPlayer()
         hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
 
-        local cmd = { 
+        local cmd = {
             SetViewAngles = spy.new(function() end),
             GetViewAngles = function() return Angle(0,0,0) end
         }
@@ -76,7 +76,7 @@ describe("Rotating Third Person Autorun Logic", function()
 
         _G.RTP_VARS.INVERT_Y.value = "1"
 
-        local cmd = { 
+        local cmd = {
             SetViewAngles = spy.new(function() end),
             GetViewAngles = function() return Angle(0,0,0) end
         }
@@ -97,7 +97,7 @@ describe("Rotating Third Person Autorun Logic", function()
         RTP.State.CameraAngles = Angle(0, 0, 0)
         RTP.State.CameraFOV = 90
 
-        local cmd = { 
+        local cmd = {
             SetViewAngles = spy.new(function() end),
             GetViewAngles = function() return Angle(0,0,0) end
         }
