@@ -35,6 +35,7 @@ Whether you're engaging in sandbox play or exploring maps, this addon offers unp
 * **Classic Movement Mode:** Prefer standard Garry's Mod controls? Enable the Classic mode setting to lock your player model to the camera direction while retaining the over-the-shoulder view.
 * **Toggle Aim:** Prefer not to hold the aim button? Enable Toggle Aim in the settings for single-click aiming.
 * **Invert Y-Axis Support:** Built-in axis inversion for players who prefer traditional flight-stick style pitch control.
+* **Camera Sensitivity:** Tune your over-the-shoulder look speed with a dedicated multiplier setting to compensate for the third-person parallax effect.
 * **Shoulder Switching:** Quickly swap your camera from the right shoulder to the left shoulder with a single command.
 * **Dynamic Crosshair Tracing:** Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space.
 * **Extensive Customization:** Manage your camera's X, Y, and Z offsets, FOV, and speeds seamlessly via the Garry's Mod Context Menu.
@@ -79,6 +80,7 @@ For server owners or power users, all variables can be configured via the consol
 | `rtp_camera_up` | Controls the camera's vertical offset from the player. | `-10` |
 | `rtp_camera_fov` | Sets the target Field of View for the camera. | `75` |
 | `rtp_camera_zoom_fov` | How much FOV to subtract when aiming. | `15` |
+| `rtp_camera_sens_multiplier` | Multiplier for camera rotation speed (1.0 = normal, 0.5 = half speed). | `1.0` |
 | `rtp_player_rotation_speed`| Controls how fast the player model turns to match movement. | `5` |
 | `rtp_player_aiming_button` | Mouse/Keyboard keycode for the aim button. | `108` |
 | `rtp_toggle_aim` | If 1, clicking the aim button toggles the aiming state. | `0` |

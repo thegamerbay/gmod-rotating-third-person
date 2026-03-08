@@ -57,10 +57,13 @@ describe("Rotating Third Person Autorun Logic", function()
         local ply = LocalPlayer()
         hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
 
-        local cmd = { SetViewAngles = spy.new(function() end) }
+        local cmd = { 
+            SetViewAngles = spy.new(function() end),
+            GetViewAngles = function() return Angle(0,0,0) end
+        }
 
-        -- Move mouse right and down
-        hooks["InputMouseApply"](cmd, 100, 50, Angle(0,0,0))
+        -- Move mouse right and down. Provide mock engine angles
+        hooks["InputMouseApply"](cmd, 100, 50, Angle(50, -100, 0))
 
         -- Pitch should clamp between -89 and 89
         assert.is_true(RTP.State.CameraAngles.pitch > 0)
@@ -73,11 +76,14 @@ describe("Rotating Third Person Autorun Logic", function()
 
         _G.RTP_VARS.INVERT_Y.value = "1"
 
-        local cmd = { SetViewAngles = spy.new(function() end) }
+        local cmd = { 
+            SetViewAngles = spy.new(function() end),
+            GetViewAngles = function() return Angle(0,0,0) end
+        }
 
         local startPitch = RTP.State.CameraAngles.pitch
-        -- Move mouse down (50)
-        hooks["InputMouseApply"](cmd, 0, 50, Angle(0,0,0))
+        -- Move mouse down (50), mock engine angle
+        hooks["InputMouseApply"](cmd, 0, 50, Angle(50, 0, 0))
 
         -- Pitch should decrease due to inversion
         assert.is_true(RTP.State.CameraAngles.pitch < startPitch)
@@ -91,15 +97,21 @@ describe("Rotating Third Person Autorun Logic", function()
         RTP.State.CameraAngles = Angle(0, 0, 0)
         RTP.State.CameraFOV = 90
 
-        local cmd = { SetViewAngles = spy.new(function() end) }
+        local cmd = { 
+            SetViewAngles = spy.new(function() end),
+            GetViewAngles = function() return Angle(0,0,0) end
+        }
 
-        -- With mouse x=100, y=100
-        -- deltaX = 100 * 0.022 (m_yaw) * 3 (sens) * 1 (fovScale) = 6.6
-        -- deltaY = 100 * 0.022 (m_pitch) * 3 (sens) * 1 (fovScale) = 6.6
-        hooks["InputMouseApply"](cmd, 100, 100, Angle(0,0,0))
+        _G.RTP_VARS.SENS_MULTIPLIER.value = "2.0"
 
-        assert.are.equal(-6.6, RTP.State.CameraAngles.yaw)
-        assert.are.equal(6.6, RTP.State.CameraAngles.pitch)
+        -- With engine angles giving 50 pitch, 100 yaw difference
+        -- math.AngleDifference(ang.yaw, cmd:GetViewAngles().yaw) => 100
+        -- finalDeltaYaw = 100 * (90/90) * 2.0 = 200
+        -- finalDeltaPitch = 50 * (90/90) * 2.0 = 100
+        hooks["InputMouseApply"](cmd, 0, 0, Angle(50, 100, 0))
+
+        assert.are.equal(-160, RTP.State.CameraAngles.yaw)
+        assert.are.equal(89, RTP.State.CameraAngles.pitch) -- clamped to 89
     end)
 
     it("should correct movement vectors during CreateMove", function()

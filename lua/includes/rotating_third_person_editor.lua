@@ -191,6 +191,18 @@ local function DrawZoomFovSettings()
     Editor.PANEL.ZoomFov = DrawScratchBlock( "rtp_ui_zoom_fov", 0, 90, "rtp_camera_zoom_fov", "rtp_tip_zoom_fov" )
 end
 
+local function DrawSensSettings()
+    Editor.PANEL.SensMult = DrawScratchBlock(
+        "rtp_ui_sens_mult", 0.1, 2.0, "rtp_camera_sens_multiplier", "rtp_tip_sens_mult"
+    )
+
+    -- Override for float logic
+    local currentVal = GetConVar("rtp_camera_sens_multiplier"):GetFloat()
+    Editor.PANEL.SensMult.numberScratch:SetDecimals( 2 )
+    Editor.PANEL.SensMult.numberScratch:SetValue( currentVal )
+    Editor.PANEL.SensMult.textEntry:SetValue( currentVal )
+end
+
 local function DrawAimingBinder()
     local offset = getNewElementYOffset()
 
@@ -231,6 +243,12 @@ local function ResetSettings()
     if Editor.PANEL.ZoomFov then
         Editor.PANEL.ZoomFov.textEntry:SetValue( 15 )
         Editor.PANEL.ZoomFov.textEntry.OnTextChanged()
+    end
+
+    RunConsoleCommand( "rtp_camera_sens_multiplier", "1" )
+    if Editor.PANEL.SensMult then
+        Editor.PANEL.SensMult.textEntry:SetValue( 1 )
+        Editor.PANEL.SensMult.numberScratch:SetValue( 1 )
     end
 
     RunConsoleCommand( "rtp_camera_fov_change_speed", "2" )
@@ -327,6 +345,7 @@ local function DrawEditor( window )
     DrawRightSettings()
     DrawFovSettings()
     DrawZoomFovSettings()
+    DrawSensSettings()
     DrawAimingBinder()
     DrawCheckboxes()
     DrawResetButton()

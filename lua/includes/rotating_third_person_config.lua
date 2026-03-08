@@ -1,5 +1,6 @@
 RTP_VARS = {
     ENABLED = CreateClientConVar("rtp_enabled", "1", true, false),
+    SENS_MULTIPLIER = CreateClientConVar("rtp_camera_sens_multiplier", "1.0", true, false),
     CAM_FORWARD = CreateClientConVar("rtp_camera_forward", "50", true, false),
     CAM_RIGHT = CreateClientConVar("rtp_camera_right", "20", true, false),
     CAM_UP = CreateClientConVar("rtp_camera_up", "-10", true, false),

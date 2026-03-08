@@ -15,6 +15,7 @@ _G.CreateClientConVar = function(name, default, save, userdata, helptext)
         userdata = userdata,
         helptext = helptext,
         GetInt = function(self) return tonumber(self.value) or 0 end,
+        GetFloat = function(self) return tonumber(self.value) or 0 end,
         GetBool = function(self) return self.value == "1" or self.value == "true" end,
         GetString = function(self) return self.value end,
         SetFloat = function(self, val) self.value = tostring(val) end,
@@ -61,7 +62,14 @@ _G.math.ApproachAngle = function(cur, target, inc)
     return target
 end
 _G.math.NormalizeAngle = function(ang)
-    return ang % 360
+    ang = ang % 360
+    if ang > 180 then ang = ang - 360 end
+    return ang
+end
+_G.math.AngleDifference = function(a, b)
+    local diff = (a - b) % 360
+    if diff > 180 then diff = diff - 360 end
+    return diff
 end
 
 _G.Lerp = function(t, a, b)
