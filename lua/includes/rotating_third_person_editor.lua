@@ -221,11 +221,11 @@ local function DrawAimingBinder()
 end
 
 local function DrawSmartScopeThresholdSettings()
-    Editor.PANEL.SmartScopeThreshold = DrawScratchBlock( 
-        "rtp_ui_smart_scope_threshold", 
-        10, 110, 
-        "rtp_smart_scope_threshold", 
-        "rtp_tip_smart_scope_threshold" 
+    Editor.PANEL.SmartScopeThreshold = DrawScratchBlock(
+        "rtp_ui_smart_scope_threshold",
+        10, 110,
+        "rtp_smart_scope_threshold",
+        "rtp_tip_smart_scope_threshold"
     )
 end
 

@@ -55,9 +55,9 @@ describe("Rotating Third Person Autorun Logic", function()
 
         -- Change threshold to lower than FOV
         _G.RTP_VARS.SMART_SCOPE_THRESHOLD.value = "30"
-        
+
         local view2 = hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90)
-        
+
         -- Should return view because 40 > 30 (FOV is above threshold)
         assert.is_not_nil(view2)
     end)
