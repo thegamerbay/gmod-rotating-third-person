@@ -12,6 +12,7 @@ RTP_VARS = {
     INVERT_Y = CreateClientConVar("rtp_invert_y", "0", true, false),
     TOGGLE_AIM = CreateClientConVar("rtp_toggle_aim", "0", true, false),
     SMART_SCOPE = CreateClientConVar("rtp_smart_scope", "1", true, false, "Auto-disable in sniper scopes"),
+    SMART_SCOPE_THRESHOLD = CreateClientConVar("rtp_smart_scope_threshold", "50", true, false),
     ZOOM_FOV = CreateClientConVar("rtp_camera_zoom_fov", "15", true, false),
     DISABLE_ROT_WHEN_MOVE = CreateClientConVar("rtp_classic_movement_mode", "0", true, false),
     TRACE_CROSSHAIR = CreateClientConVar("rtp_crosshair_trace_position", "1", true, false)

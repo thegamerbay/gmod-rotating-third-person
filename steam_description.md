@@ -53,7 +53,8 @@ For server owners or power users, all variables can be configured via the consol
 [*] [b]rtp_player_rotation_speed[/b] - Controls how fast the player model turns to match movement. Default: 5
 [*] [b]rtp_player_aiming_button[/b] - Mouse/Keyboard keycode for the aim button. Default: 108
 [*] [b]rtp_toggle_aim[/b] - If 1, clicking the aim button toggles the aiming state. Default: 0
-[*] [b]rtp_smart_scope[/b] - Automatically disables third-person when zooming in (FOV < 50). Default: 1
+[*] [b]rtp_smart_scope[/b] - Automatically disables third-person when zooming in (FOV < threshold). Default: 1
+[*] [b]rtp_smart_scope_threshold[/b] - Sets the FOV threshold below which the Smart Scope automatically switches to first-person. Default: 50
 [*] [b]rtp_invert_y[/b] - Inverts the vertical mouse pitch rotation. Default: 0
 [*] [b]rtp_crosshair_hidden_if_not_aiming[/b] - Hides the default crosshair while not aiming. Default: 0
 [*] [b]rtp_classic_movement_mode[/b] - Enables Classic movement mode: locks model rotation to camera direction. Default: 0

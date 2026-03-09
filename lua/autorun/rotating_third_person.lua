@@ -34,7 +34,7 @@ local function IsAddonActive(ply)
     if not IsValid(ply) or not ply:Alive() or ply:InVehicle() then return false end
 
     -- Smart Scope: if FOV is significantly narrowed (sniper scope), disable third person view
-    if RTP_VARS.SMART_SCOPE:GetBool() and ply:GetFOV() < 50 then return false end
+    if RTP_VARS.SMART_SCOPE:GetBool() and ply:GetFOV() < RTP_VARS.SMART_SCOPE_THRESHOLD:GetInt() then return false end
 
     return true
 end
