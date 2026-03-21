@@ -130,7 +130,8 @@ describe("Rotating Third Person Autorun Logic", function()
             GetForwardMove = function() return 400 end,
             GetSideMove = function() return 0 end,
             SetForwardMove = spy.new(function() end),
-            SetSideMove = spy.new(function() end)
+            SetSideMove = spy.new(function() end),
+            KeyDown = function() return false end
         }
 
         RTP.State.CameraAngles = Angle(0, 90, 0) -- Looking right
@@ -139,6 +140,27 @@ describe("Rotating Third Person Autorun Logic", function()
 
         assert.spy(cmd.SetForwardMove).was.called()
         assert.spy(cmd.SetSideMove).was.called()
+    end)
+
+    it("should block IN_ATTACK2 when aiming with Right Mouse Button", function()
+        local ply = LocalPlayer()
+        hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
+
+        _G.RTP_VARS.AIM_BUTTON.value = "108"
+        _G.IN_ATTACK2 = 2048
+
+        local cmd = {
+            GetForwardMove = function() return 0 end,
+            GetSideMove = function() return 0 end,
+            SetForwardMove = spy.new(function() end),
+            SetSideMove = spy.new(function() end),
+            KeyDown = spy.new(function(self, key) return key == _G.IN_ATTACK2 end),
+            RemoveKey = spy.new(function() end)
+        }
+
+        hooks["CreateMove"](cmd)
+
+        assert.spy(cmd.RemoveKey).was.called_with(_G.IN_ATTACK2)
     end)
 
     it("should match pitch and yaw to camera angles in classic movement mode", function()
@@ -151,7 +173,8 @@ describe("Rotating Third Person Autorun Logic", function()
             GetForwardMove = function() return 400 end,
             GetSideMove = function() return 0 end,
             SetForwardMove = spy.new(function() end),
-            SetSideMove = spy.new(function() end)
+            SetSideMove = spy.new(function() end),
+            KeyDown = function() return false end
         }
 
         RTP.State.CameraAngles = Angle(45, 90, 0) -- Pitch 45, Yaw 90
@@ -215,7 +238,7 @@ describe("Rotating Third Person Autorun Logic", function()
 
         hooks["HUDPaint"]()
 
-        assert.spy(_G.surface.SetDrawColor).was.called()
+        assert.spy(_G.surface.SetDrawColor).was.called_with(255, 230, 0, 240)
         assert.spy(_G.surface.DrawLine).was.called(4)
     end)
 end)
