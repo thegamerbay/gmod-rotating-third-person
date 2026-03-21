@@ -14,7 +14,7 @@ The Third Person Rotating Camera is a Garry's Mod addon that completely overhaul
 [*] [b]Invert Y-Axis Support:[/b] Built-in axis inversion for players who prefer traditional flight-stick style pitch control.
 [*] [b]Camera Sensitivity:[/b] Tune your over-the-shoulder look speed with a dedicated multiplier setting to compensate for the third-person parallax effect.
 [*] [b]Shoulder Switching:[/b] Quickly swap your camera from the right shoulder to the left shoulder with a single command.
-[*] [b]Dynamic Crosshair Tracing:[/b] Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space.
+[*] [b]Dynamic Crosshair Tracing:[/b] Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space. Fully customizable size and color!
 [*] [b]Extensive Customization:[/b] Manage your camera's X, Y, and Z offsets, FOV, and speeds seamlessly via the Garry's Mod Context Menu.
 [*] [b]Full Localization Support (31 Languages):[/b] Enjoy high-quality native UI translations and context-aware help tooltips for every setting.
 [/list]
@@ -59,6 +59,8 @@ For server owners or power users, all variables can be configured via the consol
 [*] [b]rtp_crosshair_hidden_if_not_aiming[/b] - Hides the default crosshair while not aiming. Default: 0
 [*] [b]rtp_classic_movement_mode[/b] - Enables Classic movement mode: locks model rotation to camera direction. Default: 0
 [*] [b]rtp_crosshair_trace_position[/b] - Draws a custom dynamic crosshair showing true bullet trajectory. Default: 0
+[*] [b]rtp_crosshair_size[/b] - Adjusts the size of the custom crosshair. Default: 3
+[*] [b]rtp_crosshair_r/g/b/a[/b] - Adjusts the color (RGBA) of the custom crosshair. Default: 255/230/0/240
 [/list]
 
 Pictured PM: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=744357881]Haydee [P.M][/url]

@@ -101,6 +101,11 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
     local ply = LocalPlayer()
     if not IsAddonActive(ply) or not RTP.State.Initialized then return end
 
+    -- Block IN_ATTACK2 if we are aiming with Right Mouse Button (108)
+    if RTP_VARS.AIM_BUTTON:GetInt() == 108 and cmd:KeyDown(IN_ATTACK2) then
+        cmd:RemoveKey(IN_ATTACK2)
+    end
+
     -- Important: Invert SideMove. In GMod +SideMove is right,
     -- but for the Angle() method a positive Y is left.
     local moveDir = Vector(cmd:GetForwardMove(), -cmd:GetSideMove(), 0)
@@ -145,7 +150,7 @@ hook.Add("CalcView", "RTP.CalcView", function(ply, origin, angles, fov)
 
     local camFwd = RTP_VARS.CAM_FORWARD:GetInt()
     local camRight = RTP_VARS.CAM_RIGHT:GetInt()
-    local camUp = RTP_VARS.CAM_UP:GetInt() + (ply:Crouching() and 20 or 0)
+    local camUp = RTP_VARS.CAM_UP:GetInt()
 
     -- Trace to prevent the camera from clipping through walls
     local tr = util.TraceHull({
@@ -191,13 +196,19 @@ local function DrawTraceCrossHair()
     local trace = util.TraceLine(traceData)
     local pos = trace.HitPos:ToScreen()
 
-    surface.SetDrawColor(255, 230, 0, 240)
+    local r = RTP_VARS.CROSSHAIR_R:GetInt()
+    local g = RTP_VARS.CROSSHAIR_G:GetInt()
+    local b = RTP_VARS.CROSSHAIR_B:GetInt()
+    local a = RTP_VARS.CROSSHAIR_A:GetInt()
+    local size = RTP_VARS.CROSSHAIR_SIZE:GetInt()
 
-    surface.DrawLine(pos.x - 5, pos.y, pos.x - 8, pos.y)
-    surface.DrawLine(pos.x + 5, pos.y, pos.x + 8, pos.y)
+    surface.SetDrawColor(r, g, b, a)
 
-    surface.DrawLine(pos.x, pos.y - 5, pos.x, pos.y - 8)
-    surface.DrawLine(pos.x, pos.y + 5, pos.x, pos.y + 8)
+    surface.DrawLine(pos.x - 5, pos.y, pos.x - (5 + size), pos.y)
+    surface.DrawLine(pos.x + 5, pos.y, pos.x + (5 + size), pos.y)
+
+    surface.DrawLine(pos.x, pos.y - 5, pos.x, pos.y - (5 + size))
+    surface.DrawLine(pos.x, pos.y + 5, pos.x, pos.y + (5 + size))
 end
 
 -- Hook to disable standard crosshair

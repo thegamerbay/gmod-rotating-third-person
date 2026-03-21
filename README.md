@@ -37,7 +37,7 @@ Whether you're engaging in sandbox play or exploring maps, this addon offers unp
 * **Invert Y-Axis Support:** Built-in axis inversion for players who prefer traditional flight-stick style pitch control.
 * **Camera Sensitivity:** Tune your over-the-shoulder look speed with a dedicated multiplier setting to compensate for the third-person parallax effect.
 * **Shoulder Switching:** Quickly swap your camera from the right shoulder to the left shoulder with a single command.
-* **Dynamic Crosshair Tracing:** Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space.
+* **Dynamic Crosshair Tracing:** Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space. Fully customizable with RGBA color and size settings!
 * **Extensive Customization:** Manage your camera's X, Y, and Z offsets, FOV, and speeds seamlessly via the Garry's Mod Context Menu.
 * **Full Localization Support (31 Languages):** Enjoy high-quality native UI translations and context-aware help tooltips for every setting.
 
@@ -90,6 +90,8 @@ For server owners or power users, all variables can be configured via the consol
 | `rtp_crosshair_hidden_if_not_aiming` | Hides the default crosshair while not aiming. | `0` |
 | `rtp_classic_movement_mode` | Enables Classic movement mode: locks model rotation to camera direction. | `0` |
 | `rtp_crosshair_trace_position` | Draws a custom dynamic crosshair showing true bullet trajectory. | `0` |
+| `rtp_crosshair_size` | Adjusts the size of the custom crosshair. | `3` |
+| `rtp_crosshair_r`, `g`, `b`, `a` | Adjusts the color (RGBA) of the custom crosshair. | `255, 230, 0, 240` |
 
 ---
 

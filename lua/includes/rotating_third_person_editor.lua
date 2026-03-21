@@ -1,5 +1,5 @@
 local PANEL_WIDTH = 350
-local PANEL_HEIGHT = 550
+local PANEL_HEIGHT = 700
 local PANEL_TITLE = "Third Person Rotating Camera"
 local ELEMENTS_HEIGHT = 30
 
@@ -229,6 +229,46 @@ local function DrawSmartScopeThresholdSettings()
     )
 end
 
+local function DrawCrosshairColorSettings()
+    local yOffset = getNewElementYOffset()
+
+    local label = Editor.PANEL.Settings:Add("DLabel")
+    label:SetPos(10, yOffset + 5)
+    label:SetText(language.GetPhrase("rtp_ui_crosshair_color"))
+    label:SizeToContents()
+
+    local colorMixer = Editor.PANEL.Settings:Add("DColorMixer")
+    colorMixer:SetPos(160, yOffset)
+    colorMixer:SetSize(140, 100)
+    colorMixer:SetPalette(false)
+    colorMixer:SetAlphaBar(true)
+    colorMixer:SetWangs(true)
+
+    local initR = GetConVar("rtp_crosshair_r"):GetInt()
+    local initG = GetConVar("rtp_crosshair_g"):GetInt()
+    local initB = GetConVar("rtp_crosshair_b"):GetInt()
+    local initA = GetConVar("rtp_crosshair_a"):GetInt()
+    colorMixer:SetColor(Color(initR, initG, initB, initA))
+
+    colorMixer.ValueChanged = function(self, color)
+        RunConsoleCommand("rtp_crosshair_r", tostring(color.r))
+        RunConsoleCommand("rtp_crosshair_g", tostring(color.g))
+        RunConsoleCommand("rtp_crosshair_b", tostring(color.b))
+        RunConsoleCommand("rtp_crosshair_a", tostring(color.a))
+    end
+
+    AddHelpIcon(Editor.PANEL.Settings, 305, yOffset + 5, "rtp_tip_crosshair_color")
+
+    Editor.PANEL.CrosshairColor = colorMixer
+    Editor.newElementYOffset = Editor.newElementYOffset + 70
+end
+
+local function DrawCrosshairSizeSettings()
+    Editor.PANEL.CrosshairSize = DrawScratchBlock(
+        "rtp_ui_crosshair_size", 1, 20, "rtp_crosshair_size", "rtp_tip_crosshair_size"
+    )
+end
+
 local function ResetSettings()
     RunConsoleCommand( "rtp_enabled", "1" )
 
@@ -272,6 +312,20 @@ local function ResetSettings()
     RunConsoleCommand( "rtp_crosshair_trace_position", "1" )
     if Editor.PANEL.IsTraceCrosshairPosition then
         Editor.PANEL.IsTraceCrosshairPosition:SetValue( true )
+    end
+
+    RunConsoleCommand("rtp_crosshair_r", "255")
+    RunConsoleCommand("rtp_crosshair_g", "230")
+    RunConsoleCommand("rtp_crosshair_b", "0")
+    RunConsoleCommand("rtp_crosshair_a", "240")
+    if Editor.PANEL.CrosshairColor then
+        Editor.PANEL.CrosshairColor:SetColor(Color(255, 230, 0, 240))
+    end
+
+    RunConsoleCommand("rtp_crosshair_size", "3")
+    if Editor.PANEL.CrosshairSize then
+        Editor.PANEL.CrosshairSize.textEntry:SetValue(3)
+        Editor.PANEL.CrosshairSize.textEntry.OnTextChanged()
     end
 
     -- New variables
@@ -363,6 +417,8 @@ local function DrawEditor( window )
     DrawSensSettings()
     DrawAimingBinder()
     DrawSmartScopeThresholdSettings()
+    DrawCrosshairSizeSettings()
+    DrawCrosshairColorSettings()
     DrawCheckboxes()
     DrawResetButton()
 end

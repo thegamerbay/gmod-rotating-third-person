@@ -15,7 +15,12 @@ RTP_VARS = {
     SMART_SCOPE_THRESHOLD = CreateClientConVar("rtp_smart_scope_threshold", "50", true, false),
     ZOOM_FOV = CreateClientConVar("rtp_camera_zoom_fov", "15", true, false),
     DISABLE_ROT_WHEN_MOVE = CreateClientConVar("rtp_classic_movement_mode", "0", true, false),
-    TRACE_CROSSHAIR = CreateClientConVar("rtp_crosshair_trace_position", "1", true, false)
+    TRACE_CROSSHAIR = CreateClientConVar("rtp_crosshair_trace_position", "1", true, false),
+    CROSSHAIR_R = CreateClientConVar("rtp_crosshair_r", "255", true, false),
+    CROSSHAIR_G = CreateClientConVar("rtp_crosshair_g", "230", true, false),
+    CROSSHAIR_B = CreateClientConVar("rtp_crosshair_b", "0", true, false),
+    CROSSHAIR_A = CreateClientConVar("rtp_crosshair_a", "240", true, false),
+    CROSSHAIR_SIZE = CreateClientConVar("rtp_crosshair_size", "3", true, false)
 }
 
 -- Convenient command for binding (bind x rtp_toggle)
