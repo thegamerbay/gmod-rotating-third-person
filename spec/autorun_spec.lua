@@ -160,7 +160,7 @@ describe("Rotating Third Person Autorun Logic", function()
 
         hooks["CreateMove"](cmd)
 
-        assert.spy(cmd.RemoveKey).was.called_with(_G.IN_ATTACK2)
+        assert.spy(cmd.RemoveKey).was.called_with(cmd, _G.IN_ATTACK2)
     end)
 
     it("should match pitch and yaw to camera angles in classic movement mode", function()
