@@ -1,5 +1,5 @@
 local PANEL_WIDTH = 350
-local PANEL_HEIGHT = 700
+local PANEL_HEIGHT = 710
 local PANEL_TITLE = "Third Person Rotating Camera"
 local ELEMENTS_HEIGHT = 30
 
