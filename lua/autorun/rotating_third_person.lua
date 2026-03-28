@@ -105,7 +105,7 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
         -- Get the key name from our mod's settings (e.g. "MOUSE2" or "X")
         local aimBtn = RTP_VARS.AIM_BUTTON:GetInt()
         local aimKeyName = input.GetKeyName(aimBtn)
-        
+
         -- Get the key bound to secondary attack (+attack2) in GMod (e.g. "mouse2")
         local attack2Bind = input.LookupBinding("+attack2")
 
