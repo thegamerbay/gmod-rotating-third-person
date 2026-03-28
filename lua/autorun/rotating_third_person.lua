@@ -186,7 +186,9 @@ hook.Add("CalcView", "RTP.CalcView", function(ply, origin, angles, fov)
 
     -- 2. Calculate transition progress
     if doSmooth then
-        RTP.State.TransitionProgress = math.Approach(RTP.State.TransitionProgress, targetProgress, FrameTime() * transSpeed)
+        RTP.State.TransitionProgress = math.Approach(
+            RTP.State.TransitionProgress, targetProgress, FrameTime() * transSpeed
+        )
     else
         RTP.State.TransitionProgress = targetProgress
     end
@@ -259,8 +261,8 @@ end)
 hook.Add("ShouldDrawLocalPlayer", "RTP.DrawPlayer", function(ply)
     -- Draw the player model only if transition progress is above 15%.
     -- If the camera is too close to the eyes (transition completes), hide the model.
-    if RTP.State.TransitionProgress > 0.15 then 
-        return true 
+    if RTP.State.TransitionProgress > 0.15 then
+        return true
     end
 end)
 

@@ -328,7 +328,8 @@ describe("Rotating Third Person Autorun Logic", function()
 
         -- Enable smoothing by setting speed > 0
         _G.RTP_VARS.TRANSITION_SPEED.value = "2.0"
-        
+
+
         -- Default starts at Progress 1 (Fully third person)
         assert.are.equal(1, RTP.State.TransitionProgress)
 
@@ -342,11 +343,13 @@ describe("Rotating Third Person Autorun Logic", function()
         assert.is_true(RTP.State.TransitionProgress < 1.0)
         assert.is_true(RTP.State.TransitionProgress > 0.0)
         assert.is_not_nil(view)
-        
+
+
         -- Origin and fov should be interpolated
         assert.is_true(view.fov > 75)
         assert.is_true(view.fov < 90)
-        
+
+
         -- Angle should also be interpolated properly
         assert.is_not_nil(view.angles)
     end)
