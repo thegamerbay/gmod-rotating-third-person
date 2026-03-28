@@ -185,7 +185,8 @@ describe("Rotating Third Person Autorun Logic", function()
             SetForwardMove = spy.new(function() end),
             SetSideMove = spy.new(function() end),
             KeyDown = spy.new(function(self, key) return key == _G.IN_ATTACK2 end),
-            RemoveKey = spy.new(function() end)
+            RemoveKey = spy.new(function() end),
+            SetViewAngles = spy.new(function() end)
         }
 
         hooks["CreateMove"](cmd)
@@ -209,7 +210,8 @@ describe("Rotating Third Person Autorun Logic", function()
             SetForwardMove = spy.new(function() end),
             SetSideMove = spy.new(function() end),
             KeyDown = spy.new(function(self, key) return key == _G.IN_ATTACK2 end),
-            RemoveKey = spy.new(function() end)
+            RemoveKey = spy.new(function() end),
+            SetViewAngles = spy.new(function() end)
         }
 
         hooks["CreateMove"](cmd)

@@ -123,11 +123,11 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
     if RTP.State.IsAiming then
         local aimRotSpeed = RTP_VARS.AIM_ROT_SPEED:GetInt()
 
-        -- Smooth rotation if setting is enabled. 
+        -- Smooth rotation if setting is enabled.
         -- aimRotSpeed (1 to 20) acts as tracking speed. Multiply by 0.75 to ensure 20 isn't too sharp.
         local fraction = math.Clamp(FrameTime() * aimRotSpeed * 0.75, 0.01, 0.99)
         RTP.State.PlayerAngles = LerpAngle(fraction, RTP.State.PlayerAngles, RTP.State.CameraAngles)
-        
+
         cmd:SetViewAngles(RTP.State.PlayerAngles)
     end
 
