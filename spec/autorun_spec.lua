@@ -39,26 +39,25 @@ describe("Rotating Third Person Autorun Logic", function()
         assert.are.equal(75, RTP.State.CameraFOV)
     end)
 
-    it("should auto-disable third person for smart scopes (FOV < threshold)", function()
+    it("should auto-disable third person when aiming (Hybrid Mode)", function()
         -- Load smart scope
         _G.RTP_VARS.SMART_SCOPE.value = "1"
-        _G.RTP_VARS.SMART_SCOPE_THRESHOLD.value = "50"
-
-        -- Mock a sniper rifle zoom
         local ply = LocalPlayer()
-        ply.GetFOV = function() return 40 end
+
+        -- Simulate aiming
+        RTP.State.IsAiming = true
 
         local view = hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90)
 
         -- If it returns nil, the hook yielded to first person
         assert.is_nil(view)
 
-        -- Change threshold to lower than FOV
-        _G.RTP_VARS.SMART_SCOPE_THRESHOLD.value = "30"
+        -- Simulate not aiming
+        RTP.State.IsAiming = false
 
         local view2 = hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90)
 
-        -- Should return view because 40 > 30 (FOV is above threshold)
+        -- Should return view
         assert.is_not_nil(view2)
     end)
 

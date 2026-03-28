@@ -33,8 +33,8 @@ local function IsAddonActive(ply)
     if not RTP_VARS.ENABLED:GetBool() then return false end
     if not IsValid(ply) or not ply:Alive() or ply:InVehicle() then return false end
 
-    -- Smart Scope: if FOV is significantly narrowed (sniper scope), disable third person view
-    if RTP_VARS.SMART_SCOPE:GetBool() and ply:GetFOV() < RTP_VARS.SMART_SCOPE_THRESHOLD:GetInt() then return false end
+    -- Hybrid Mode: Switch to first person while aiming
+    if RTP_VARS.SMART_SCOPE:GetBool() and RTP.State.IsAiming then return false end
 
     return true
 end
@@ -62,10 +62,14 @@ local cv_fov_desired = GetConVar("fov_desired")
 -- Handle mouse movement input
 hook.Add("InputMouseApply", "RTP.InputMouseApply", function(cmd, x, y, ang)
     local ply = LocalPlayer()
-    if not IsAddonActive(ply) then return end
     if not RTP.State.Initialized then InitState(ply) return true end
 
-    UpdateAimState()
+    -- Always update aiming state, even if we are temporarily in first person
+    if RTP_VARS.ENABLED:GetBool() and IsValid(ply) and ply:Alive() and not ply:InVehicle() then
+        UpdateAimState()
+    end
+
+    if not IsAddonActive(ply) then return end
 
     local multiplier = RTP_VARS.SENS_MULTIPLIER:GetFloat()
     local invert = RTP_VARS.INVERT_Y:GetBool() and -1 or 1

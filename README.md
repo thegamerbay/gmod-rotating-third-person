@@ -31,7 +31,7 @@ Whether you're engaging in sandbox play or exploring maps, this addon offers unp
 
 * **True Aim-to-Look Mechanics:** Your player model dynamically adjusts and looks exactly where you are aiming.
 * **Precise Multiplayer Prediction:** No more rubberbanding or "auto-walking"! The movement is perfectly synced and calculated relative to the camera's angle.
-* **Smart Scope Integration:** Play alongside weapon bases like TFA or CW 2.0 without conflict. The camera seamlessly auto-transitions to first-person when aiming through high-power sniper scopes.
+* **Hybrid Mode (Smart Scope):** Play alongside weapon bases like TFA or CW 2.0 without conflict. The camera seamlessly auto-transitions to first-person when you try to aim.
 * **Classic Movement Mode:** Prefer standard Garry's Mod controls? Enable the Classic mode setting to lock your player model to the camera direction while retaining the over-the-shoulder view.
 * **Toggle Aim:** Prefer not to hold the aim button? Enable Toggle Aim in the settings for single-click aiming.
 * **Invert Y-Axis Support:** Built-in axis inversion for players who prefer traditional flight-stick style pitch control.
@@ -52,7 +52,7 @@ Customize the camera in real-time without typing any commands!
 2. Click on the **Third Person Rotating Camera** icon (usually located on the top bar or under a dedicated tab).
 3. Adjust the sliders for Camera Distance, Up/Down, Right/Left, and FOV.
 4. Set your preferred Aiming button (default is Right Mouse Button).
-5. Enable or disable new features like Toggle Aim, Smart Scope, and Invert Y-Axis directly via checkboxes.
+5. Enable or disable new features like Toggle Aim, Hybrid Mode (Smart Scope), and Invert Y-Axis directly via checkboxes.
 
 ![Settings Menu](assets/settings.jpg)
 
@@ -86,8 +86,7 @@ For server owners or power users, all variables can be configured via the consol
 | `rtp_player_rotation_speed`| Controls how fast the player model turns to match movement. | `5` |
 | `rtp_player_aiming_button` | Mouse/Keyboard keycode for the aim button. | `108` |
 | `rtp_toggle_aim` | If 1, clicking the aim button toggles the aiming state. | `0` |
-| `rtp_smart_scope` | Automatically disables third-person when zooming in (FOV < threshold). | `1` |
-| `rtp_smart_scope_threshold` | Sets the FOV threshold below which the Smart Scope automatically switches to first-person. | `50` |
+| `rtp_smart_scope` | Automatically switches to first-person view while you are aiming (Hybrid mode). | `0` |
 | `rtp_invert_y` | Inverts the vertical mouse pitch rotation. | `0` |
 | `rtp_crosshair_hidden_if_not_aiming` | Hides the default crosshair while not aiming. | `0` |
 | `rtp_classic_movement_mode` | Enables Classic movement mode: locks model rotation to camera direction. | `0` |

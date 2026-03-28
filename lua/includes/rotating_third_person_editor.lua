@@ -1,5 +1,5 @@
 local PANEL_WIDTH = 350
-local PANEL_HEIGHT = 710
+local PANEL_HEIGHT = 680
 local PANEL_TITLE = "Third Person Rotating Camera"
 local ELEMENTS_HEIGHT = 30
 
@@ -244,14 +244,6 @@ local function DrawAimingBinder()
     AddHelpIcon( Editor.PANEL.Settings, 305, offset + 5, "rtp_tip_aiming_btn" )
 end
 
-local function DrawSmartScopeThresholdSettings()
-    Editor.PANEL.SmartScopeThreshold = DrawScratchBlock(
-        "rtp_ui_smart_scope_threshold",
-        10, 110,
-        "rtp_smart_scope_threshold",
-        "rtp_tip_smart_scope_threshold"
-    )
-end
 
 local function DrawCrosshairColorSettings()
     local yOffset = getNewElementYOffset()
@@ -362,14 +354,8 @@ local function ResetSettings()
     RunConsoleCommand( "rtp_toggle_aim", "0" )
     Editor.PANEL.IsToggleAim:SetValue( false )
 
-    RunConsoleCommand( "rtp_smart_scope", "1" )
-    Editor.PANEL.IsSmartScope:SetValue( true )
-
-    RunConsoleCommand( "rtp_smart_scope_threshold", "50" )
-    if Editor.PANEL.SmartScopeThreshold then
-        Editor.PANEL.SmartScopeThreshold.textEntry:SetValue( 50 )
-        Editor.PANEL.SmartScopeThreshold.numberScratch:SetValue( 50 )
-    end
+    RunConsoleCommand( "rtp_smart_scope", "0" )
+    Editor.PANEL.IsSmartScope:SetValue( false )
 
     RunConsoleCommand( "rtp_invert_y", "0" )
     Editor.PANEL.IsInvertY:SetValue( false )
@@ -430,7 +416,6 @@ local function DrawEditor( window )
     DrawZoomFovSettings()
     DrawSensSettings()
     DrawAimingBinder()
-    DrawSmartScopeThresholdSettings()
     DrawCrosshairSizeSettings()
     DrawCrosshairColorSettings()
     DrawCheckboxes()
