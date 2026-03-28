@@ -140,6 +140,24 @@ local function addNumberScratch( min, max, value, offset )
     return numberScratch
 end
 
+local function DrawCheckBox( labelKey, variable, tooltipKey )
+    local yOffset = getNewElementYOffset()
+
+    local checkBox = Editor.PANEL.Settings:Add( "DCheckBoxLabel" )
+    checkBox:SetPos( 8, yOffset + 6 )
+    checkBox:SetText( language.GetPhrase( labelKey ) )
+    checkBox:SetConVar( variable )
+    checkBox:SetValue( GetConVar( variable ):GetBool() )
+
+    if tooltipKey then
+        AddHelpIcon( Editor.PANEL.Settings, 305, yOffset + 6, tooltipKey )
+        checkBox:SetTooltip( language.GetPhrase( tooltipKey ) )
+        checkBox:SetTooltipPanelOverride( "rtp_custom_tooltip" )
+    end
+
+    return checkBox
+end
+
 local function DrawScratchBlock( labelKey, min, max, variable, tooltipKey )
     local yOffset = getNewElementYOffset()
     local value = GetConVar( variable ):GetInt()
@@ -177,6 +195,12 @@ end
 
 local function DrawUpSettings()
     Editor.PANEL.CamUp = DrawScratchBlock( "rtp_ui_cam_up", -50, 50, "rtp_camera_up", "rtp_tip_cam_up" )
+end
+
+local function DrawCrouchSettings()
+    Editor.PANEL.CrouchDrop = DrawScratchBlock( 
+        "rtp_ui_crouch_drop", 0, 50, "rtp_camera_crouch_drop", "rtp_tip_crouch_drop" 
+    )
 end
 
 local function DrawRightSettings()
@@ -284,6 +308,12 @@ local function ResetSettings()
     Editor.PANEL.CamUp.textEntry:SetValue( -10 )
     Editor.PANEL.CamUp.textEntry.OnTextChanged()
 
+    RunConsoleCommand("rtp_camera_crouch_drop", "20")
+    if Editor.PANEL.CrouchDrop then
+        Editor.PANEL.CrouchDrop.textEntry:SetValue(20)
+        Editor.PANEL.CrouchDrop.textEntry.OnTextChanged()
+    end
+
     RunConsoleCommand( "rtp_camera_fov", "75" )
     Editor.PANEL.CamFov.textEntry:SetValue( 75 )
     Editor.PANEL.CamFov.textEntry.OnTextChanged()
@@ -365,23 +395,6 @@ local function DrawResetButton()
     end
 end
 
-local function DrawCheckBox( labelKey, variable, tooltipKey )
-    local yOffset = getNewElementYOffset()
-
-    local checkBox = Editor.PANEL.Settings:Add( "DCheckBoxLabel" )
-    checkBox:SetPos( 8, yOffset + 6 )
-    checkBox:SetText( language.GetPhrase( labelKey ) )
-    checkBox:SetConVar( variable )
-    checkBox:SetValue( GetConVar( variable ):GetBool() )
-
-    if tooltipKey then
-        AddHelpIcon( Editor.PANEL.Settings, 305, yOffset + 6, tooltipKey )
-        checkBox:SetTooltip( language.GetPhrase( tooltipKey ) )
-        checkBox:SetTooltipPanelOverride( "rtp_custom_tooltip" )
-    end
-
-    return checkBox
-end
 
 local function DrawCheckboxes()
     Editor.PANEL.IsCrosshairHiddenIfNotAiming = DrawCheckBox(
@@ -411,6 +424,7 @@ local function DrawEditor( window )
     DrawEnableButton()
     DrawDistanceSettings()
     DrawUpSettings()
+    DrawCrouchSettings()
     DrawRightSettings()
     DrawFovSettings()
     DrawZoomFovSettings()

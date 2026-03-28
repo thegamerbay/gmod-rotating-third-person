@@ -15,6 +15,7 @@ The Third Person Rotating Camera is a Garry's Mod addon that completely overhaul
 [*] [b]Camera Sensitivity:[/b] Tune your over-the-shoulder look speed with a dedicated multiplier setting to compensate for the third-person parallax effect.
 [*] [b]Shoulder Switching:[/b] Quickly swap your camera from the right shoulder to the left shoulder with a single command.
 [*] [b]Dynamic Crosshair Tracing:[/b] Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space. Fully customizable size and color!
+[*] [b]Crouch Camera Drop:[/b] Maintain complete control when crouching! Customize exactly how much the camera lowers to keep your view unobstructed in tight spaces.
 [*] [b]Extensive Customization:[/b] Manage your camera's X, Y, and Z offsets, FOV, and speeds seamlessly via the Garry's Mod Context Menu.
 [*] [b]Full Localization Support (31 Languages):[/b] Enjoy high-quality native UI translations and context-aware help tooltips for every setting.
 [/list]
@@ -47,6 +48,7 @@ For server owners or power users, all variables can be configured via the consol
 [*] [b]rtp_camera_forward[/b] - Controls the camera's distance from the player. Default: 50
 [*] [b]rtp_camera_right[/b] - Controls the camera's horizontal offset. Default: 20
 [*] [b]rtp_camera_up[/b] - Controls the camera's vertical offset. Default: -10
+[*] [b]rtp_camera_crouch_drop[/b] - How much the camera lowers when crouching. (0 = no drop). Default: 20
 [*] [b]rtp_camera_fov[/b] - Sets the target Field of View for the camera. Default: 75
 [*] [b]rtp_camera_zoom_fov[/b] - How much FOV to subtract when aiming. Default: 15
 [*] [b]rtp_camera_sens_multiplier[/b] - Multiplier for camera rotation speed. Default: 1.0

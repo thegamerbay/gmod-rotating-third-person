@@ -19,7 +19,7 @@ jobs:
           id: '1620191091'
           config: 'addon.json'
           title: 'Third Person Rotating Camera'
-          description_file: 'steam_description.md'
+          description_file: 'STEAM_DESCRIPTION.md'
           changelog: "New release published via GitHub Actions. Version ${{ github.ref_name }}. See changes: https://github.com/thegamerbay/gmod-rotating-third-person/releases/tag/${{ github.ref_name }}"
           previewfile: 'materials/icon/rotating_third_person.jpg'
           visibility: '0'

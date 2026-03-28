@@ -120,7 +120,9 @@ _G.LocalPlayer = function()
         EyePos = function() return Vector(0,0,64) end,
         EyeAngles = function() return Angle(0,0,0) end,
         GetShootPos = function() return Vector(0,0,64) end,
-        GetAimVector = function() return Vector(1,0,0) end
+        GetAimVector = function() return Vector(1,0,0) end,
+        GetViewOffset = function() return Vector(0,0,64) end,
+        GetCurrentViewOffset = function() return Vector(0,0,64) end
     }
 end
 _G.IsValid = function(ent) return ent ~= nil end

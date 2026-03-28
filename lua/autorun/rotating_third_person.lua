@@ -150,12 +150,28 @@ hook.Add("CalcView", "RTP.CalcView", function(ply, origin, angles, fov)
 
     local camFwd = RTP_VARS.CAM_FORWARD:GetInt()
     local camRight = RTP_VARS.CAM_RIGHT:GetInt()
-    local camUp = RTP_VARS.CAM_UP:GetInt()
+    
+    local targetCamUp = RTP_VARS.CAM_UP:GetInt()
+    if ply:Crouching() then
+        -- Subtract the positive drop value so the camera moves down relative to standing
+        targetCamUp = targetCamUp - RTP_VARS.CROUCH_DROP:GetInt()
+    end
 
-    -- Trace to prevent the camera from clipping through walls
+    RTP.State.CurrentCamUp = RTP.State.CurrentCamUp or targetCamUp
+    RTP.State.CurrentCamUp = Lerp(FrameTime() * 10, RTP.State.CurrentCamUp, targetCamUp)
+    local camUp = RTP.State.CurrentCamUp
+
+    -- Calculate base origin for the camera endpos, holding it at standing height.
+    -- This counteracts the built-in engine crouch drop, moving all vertical drop logic
+    -- strictly into our camUp lerping system.
+    local viewZDiff = ply:GetViewOffset().z - ply:GetCurrentViewOffset().z
+    local cameraBaseOrigin = origin + Vector(0, 0, viewZDiff)
+
+    -- Trace from true player eyes (origin) to the desired camera spot 
+    -- to prevent starting the trace inside a ceiling on low ceiling maps.
     local tr = util.TraceHull({
         start = origin,
-        endpos = origin - (RTP.State.CameraAngles:Forward() * camFwd)
+        endpos = cameraBaseOrigin - (RTP.State.CameraAngles:Forward() * camFwd)
             + (RTP.State.CameraAngles:Right() * camRight)
             + (RTP.State.CameraAngles:Up() * camUp),
         filter = ply,

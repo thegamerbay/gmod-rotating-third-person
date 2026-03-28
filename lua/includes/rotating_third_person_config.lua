@@ -4,6 +4,7 @@ RTP_VARS = {
     CAM_FORWARD = CreateClientConVar("rtp_camera_forward", "50", true, false),
     CAM_RIGHT = CreateClientConVar("rtp_camera_right", "20", true, false),
     CAM_UP = CreateClientConVar("rtp_camera_up", "-10", true, false),
+    CROUCH_DROP = CreateClientConVar("rtp_camera_crouch_drop", "20", true, false),
     CAM_FOV = CreateClientConVar("rtp_camera_fov", "75", true, false),
     FOV_SPEED = CreateClientConVar("rtp_camera_fov_change_speed", "2", true, false),
     ROT_SPEED = CreateClientConVar("rtp_player_rotation_speed", "5", true, false),
