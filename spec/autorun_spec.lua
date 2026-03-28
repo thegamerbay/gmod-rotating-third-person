@@ -26,6 +26,7 @@ describe("Rotating Third Person Autorun Logic", function()
 
         -- Start with Addon Enabled
         _G.RTP_VARS.ENABLED.value = "1"
+        _G.RTP_VARS.TRANSITION_SPEED.value = "0"
     end)
 
     it("should initialize state on first CalcView", function()
@@ -318,5 +319,35 @@ describe("Rotating Third Person Autorun Logic", function()
         -- 64 + (-3.2) = 60.8
         assert.is_true(view.origin.z < 64)
         assert.is_true(view.origin.z > 28)
+    end)
+
+    it("should smoothly transition camera origin and FOV when TRANSITION_SPEED > 0", function()
+        -- Init completely
+        local ply = LocalPlayer()
+        hooks["CalcView"](ply, Vector(0,0,64), Angle(0,0,0), 90)
+
+        -- Enable smoothing by setting speed > 0
+        _G.RTP_VARS.TRANSITION_SPEED.value = "2.0"
+        
+        -- Default starts at Progress 1 (Fully third person)
+        assert.are.equal(1, RTP.State.TransitionProgress)
+
+        -- Change state to inactive to trigger transition to first person
+        _G.RTP_VARS.ENABLED.value = "0"
+
+        -- Run one frame
+        local view = hooks["CalcView"](ply, Vector(0,0,64), Angle(0,0,0), 90)
+
+        -- 1.0 - (0.016 * 2.0) = 0.968
+        assert.is_true(RTP.State.TransitionProgress < 1.0)
+        assert.is_true(RTP.State.TransitionProgress > 0.0)
+        assert.is_not_nil(view)
+        
+        -- Origin and fov should be interpolated
+        assert.is_true(view.fov > 75)
+        assert.is_true(view.fov < 90)
+        
+        -- Angle should also be interpolated properly
+        assert.is_not_nil(view.angles)
     end)
 end)

@@ -57,6 +57,12 @@ _G.math.Clamp = function(val, min, max)
     if val > max then return max end
     return val
 end
+_G.math.Approach = function(cur, target, inc)
+    inc = math.abs(inc)
+    if cur < target then return math.min(cur + inc, target) end
+    if cur > target then return math.max(cur - inc, target) end
+    return target
+end
 _G.math.ApproachAngle = function(cur, target, inc)
     -- Simplified approach angle for tests
     return target
@@ -85,6 +91,10 @@ _G.LerpAngle = function(t, a, b)
         )
     end
     return a
+end
+
+_G.LerpVector = function(t, a, b)
+    return a + (b - a) * t
 end
 
 _G.FrameTime = function() return 0.016 end

@@ -17,7 +17,8 @@ RTP.State = RTP.State or {
     IsAiming = false,
     AimToggleState = false,
     AimLastPressed = false,
-    Initialized = false
+    Initialized = false,
+    TransitionProgress = 1
 }
 
 local function InitState(ply)
@@ -170,8 +171,30 @@ end)
 
 -- Calculate camera position
 hook.Add("CalcView", "RTP.CalcView", function(ply, origin, angles, fov)
-    if not IsAddonActive(ply) then return end
     if not RTP.State.Initialized then InitState(ply) end
+
+    -- 1. Determine target state (1 = third person, 0 = first person)
+    local isActive = IsAddonActive(ply)
+    local targetProgress = isActive and 1 or 0
+    local transSpeed = RTP_VARS.TRANSITION_SPEED:GetFloat()
+    local doSmooth = transSpeed > 0
+
+    if not isActive and RTP.State.TransitionProgress == 0 then
+        RTP.State.CameraAngles = Angle(angles.pitch, angles.yaw, angles.roll)
+        RTP.State.PlayerAngles = Angle(angles.pitch, angles.yaw, angles.roll)
+    end
+
+    -- 2. Calculate transition progress
+    if doSmooth then
+        RTP.State.TransitionProgress = math.Approach(RTP.State.TransitionProgress, targetProgress, FrameTime() * transSpeed)
+    else
+        RTP.State.TransitionProgress = targetProgress
+    end
+
+    -- 3. If we are completely in first person, yield control to engine
+    if RTP.State.TransitionProgress == 0 then
+        return
+    end
 
     local camFwd = RTP_VARS.CAM_FORWARD:GetInt()
     local camRight = RTP_VARS.CAM_RIGHT:GetInt()
@@ -207,21 +230,38 @@ hook.Add("CalcView", "RTP.CalcView", function(ply, origin, angles, fov)
 
     RTP.State.CameraOrigin = tr.HitPos
 
+    -- 4. POSITION INTERPOLATION (Smooth camera flight)
+    -- origin is the first-person eye position
+    local finalOrigin = LerpVector(RTP.State.TransitionProgress, origin, RTP.State.CameraOrigin)
+
     -- Dynamic FOV
     local targetFOV = RTP_VARS.CAM_FOV:GetInt() - (RTP.State.IsAiming and RTP_VARS.ZOOM_FOV:GetInt() or 0)
     RTP.State.CameraFOV = Lerp(FrameTime() * RTP_VARS.FOV_SPEED:GetInt() * 5, RTP.State.CameraFOV, targetFOV)
 
+    -- Smoothly return FOV to standard when transitioning to first person
+    local defaultFOV = ply:GetFOV() or 90
+    local finalFOV = Lerp(RTP.State.TransitionProgress, defaultFOV, RTP.State.CameraFOV)
+
+    local finalAngles = RTP.State.CameraAngles
+    if not isActive then
+        finalAngles = LerpAngle(RTP.State.TransitionProgress, angles, RTP.State.CameraAngles)
+    end
+
     return {
-        origin = RTP.State.CameraOrigin,
-        angles = RTP.State.CameraAngles,
-        fov = RTP.State.CameraFOV,
+        origin = finalOrigin,
+        angles = finalAngles,
+        fov = finalFOV,
         drawviewer = true
     }
 end)
 
 -- Rendering
 hook.Add("ShouldDrawLocalPlayer", "RTP.DrawPlayer", function(ply)
-    if IsAddonActive(ply) then return true end
+    -- Draw the player model only if transition progress is above 15%.
+    -- If the camera is too close to the eyes (transition completes), hide the model.
+    if RTP.State.TransitionProgress > 0.15 then 
+        return true 
+    end
 end)
 
 -- Function to draw custom crosshair

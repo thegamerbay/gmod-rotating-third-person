@@ -40,6 +40,7 @@ Whether you're engaging in sandbox play or exploring maps, this addon offers unp
 * **Shoulder Switching:** Quickly swap your camera from the right shoulder to the left shoulder with a single command.
 * **Dynamic Crosshair Tracing:** Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space. Fully customizable with RGBA color and size settings!
 * **Crouch Camera Drop:** Maintain complete control when crouching! Customize exactly how much the camera lowers to keep your view unobstructed in tight spaces.
+* **Cinematic Camera Transition:** Enjoy a smooth, interpolated camera flight when switching between first-person and third-person views. Customize the transition speed!
 * **Extensive Customization:** Manage your camera's X, Y, and Z offsets, FOV, and speeds seamlessly via the Garry's Mod Context Menu.
 * **Full Localization Support (31 Languages):** Enjoy high-quality native UI translations and context-aware help tooltips for every setting.
 
@@ -86,6 +87,7 @@ For server owners or power users, all variables can be configured via the consol
 | `rtp_camera_sens_multiplier` | Multiplier for camera rotation speed (1.0 = normal, 0.5 = half speed). | `1.0` |
 | `rtp_player_rotation_speed`| Controls how fast the player model turns to match movement. | `5` |
 | `rtp_aim_rotation_speed` | Smoothness of character rotation while aiming (1 = slow, 20 = responsive). | `10` |
+| `rtp_transition_speed` | Speed of the cinematic camera flight. Set to 0 for instant switching. | `4` |
 | `rtp_player_aiming_button` | Mouse/Keyboard keycode for the aim button. | `108` |
 | `rtp_toggle_aim` | If 1, clicking the aim button toggles the aiming state. | `0` |
 | `rtp_smart_scope` | Automatically switches to first-person view while you are aiming (Hybrid mode). | `0` |

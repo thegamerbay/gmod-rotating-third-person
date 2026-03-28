@@ -17,6 +17,7 @@ The Third Person Rotating Camera is a Garry's Mod addon that completely overhaul
 [*] [b]Shoulder Switching:[/b] Quickly swap your camera from the right shoulder to the left shoulder with a single command.
 [*] [b]Dynamic Crosshair Tracing:[/b] Enable the true trajectory crosshair to see exactly where your bullets will land in 3D space. Fully customizable size and color!
 [*] [b]Crouch Camera Drop:[/b] Maintain complete control when crouching! Customize exactly how much the camera lowers to keep your view unobstructed in tight spaces.
+[*] [b]Cinematic Camera Transition:[/b] Enjoy a smooth, interpolated camera flight when switching between first-person and third-person views. Customize the transition speed!
 [*] [b]Extensive Customization:[/b] Manage your camera's X, Y, and Z offsets, FOV, and speeds seamlessly via the Garry's Mod Context Menu.
 [*] [b]Full Localization Support (31 Languages):[/b] Enjoy high-quality native UI translations and context-aware help tooltips for every setting.
 [/list]
@@ -55,6 +56,7 @@ For server owners or power users, all variables can be configured via the consol
 [*] [b]rtp_camera_sens_multiplier[/b] - Multiplier for camera rotation speed. Default: 1.0
 [*] [b]rtp_player_rotation_speed[/b] - Controls how fast the player model turns to match movement. Default: 5
 [*] [b]rtp_aim_rotation_speed[/b] - Smoothness of character rotation while aiming (1 = slow, 20 = responsive). Default: 10
+[*] [b]rtp_transition_speed[/b] - Speed of the cinematic camera flight. Set to 0 for instant switching. Default: 4
 [*] [b]rtp_player_aiming_button[/b] - Mouse/Keyboard keycode for the aim button. Default: 108
 [*] [b]rtp_toggle_aim[/b] - If 1, clicking the aim button toggles the aiming state. Default: 0
 [*] [b]rtp_smart_scope[/b] - Automatically switches to first-person view while you are aiming (Hybrid mode). Default: 0
