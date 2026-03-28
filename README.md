@@ -30,6 +30,7 @@ Whether you're engaging in sandbox play or exploring maps, this addon offers unp
 ## ✨ Features
 
 * **True Aim-to-Look Mechanics:** Your player model dynamically adjusts and looks exactly where you are aiming.
+* **Aiming Rotation Smoothness:** Configure exactly how smoothly your character turns their body to meet the camera when aiming weapon mechanics.
 * **Precise Multiplayer Prediction:** No more rubberbanding or "auto-walking"! The movement is perfectly synced and calculated relative to the camera's angle.
 * **Hybrid Mode (Smart Scope):** Play alongside weapon bases like TFA or CW 2.0 without conflict. The camera seamlessly auto-transitions to first-person when you try to aim.
 * **Classic Movement Mode:** Prefer standard Garry's Mod controls? Enable the Classic mode setting to lock your player model to the camera direction while retaining the over-the-shoulder view.
@@ -84,6 +85,7 @@ For server owners or power users, all variables can be configured via the consol
 | `rtp_camera_zoom_fov` | How much FOV to subtract when aiming. | `15` |
 | `rtp_camera_sens_multiplier` | Multiplier for camera rotation speed (1.0 = normal, 0.5 = half speed). | `1.0` |
 | `rtp_player_rotation_speed`| Controls how fast the player model turns to match movement. | `5` |
+| `rtp_aim_rotation_speed` | Smoothness of character rotation while aiming (1 = slow, 20 = responsive). | `10` |
 | `rtp_player_aiming_button` | Mouse/Keyboard keycode for the aim button. | `108` |
 | `rtp_toggle_aim` | If 1, clicking the aim button toggles the aiming state. | `0` |
 | `rtp_smart_scope` | Automatically switches to first-person view while you are aiming (Hybrid mode). | `0` |

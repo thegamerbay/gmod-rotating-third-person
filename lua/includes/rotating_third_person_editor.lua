@@ -1,5 +1,5 @@
 local PANEL_WIDTH = 350
-local PANEL_HEIGHT = 680
+local PANEL_HEIGHT = 710
 local PANEL_TITLE = "Third Person Rotating Camera"
 local ELEMENTS_HEIGHT = 30
 
@@ -227,6 +227,12 @@ local function DrawSensSettings()
     Editor.PANEL.SensMult.textEntry:SetValue( currentVal )
 end
 
+local function DrawAimRotSpeedSettings()
+    Editor.PANEL.AimRotSpeed = DrawScratchBlock(
+        "rtp_ui_aim_rot_speed", 1, 20, "rtp_aim_rotation_speed", "rtp_tip_aim_rot_speed"
+    )
+end
+
 local function DrawAimingBinder()
     local offset = getNewElementYOffset()
 
@@ -325,6 +331,12 @@ local function ResetSettings()
     RunConsoleCommand( "rtp_camera_fov_change_speed", "2" )
     RunConsoleCommand( "rtp_player_rotation_speed", "5" )
 
+    RunConsoleCommand( "rtp_aim_rotation_speed", "10" )
+    if Editor.PANEL.AimRotSpeed then
+        Editor.PANEL.AimRotSpeed.textEntry:SetValue( 10 )
+        Editor.PANEL.AimRotSpeed.textEntry.OnTextChanged()
+    end
+
     RunConsoleCommand( "rtp_player_aiming_button", "108" )
     Editor.PANEL.AimingBinder:SetValue( 108 )
 
@@ -415,6 +427,7 @@ local function DrawEditor( window )
     DrawFovSettings()
     DrawZoomFovSettings()
     DrawSensSettings()
+    DrawAimRotSpeedSettings()
     DrawAimingBinder()
     DrawCrosshairSizeSettings()
     DrawCrosshairColorSettings()

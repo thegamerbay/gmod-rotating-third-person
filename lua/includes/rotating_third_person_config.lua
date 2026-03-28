@@ -8,6 +8,7 @@ RTP_VARS = {
     CAM_FOV = CreateClientConVar("rtp_camera_fov", "75", true, false),
     FOV_SPEED = CreateClientConVar("rtp_camera_fov_change_speed", "2", true, false),
     ROT_SPEED = CreateClientConVar("rtp_player_rotation_speed", "5", true, false),
+    AIM_ROT_SPEED = CreateClientConVar("rtp_aim_rotation_speed", "10", true, false),
     AIM_BUTTON = CreateClientConVar("rtp_player_aiming_button", "108", true, false),
     HIDE_CROSSHAIR = CreateClientConVar("rtp_crosshair_hidden_if_not_aiming", "0", true, false),
     INVERT_Y = CreateClientConVar("rtp_invert_y", "0", true, false),

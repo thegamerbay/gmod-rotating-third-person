@@ -7,6 +7,7 @@ The Third Person Rotating Camera is a Garry's Mod addon that completely overhaul
 [h2]✨ Features[/h2]
 [list]
 [*] [b]True Aim-to-Look Mechanics:[/b] Your player model dynamically adjusts and looks exactly where you are aiming.
+[*] [b]Aiming Rotation Smoothness:[/b] Configure exactly how smoothly your character turns their body to meet the camera when aiming weapon mechanics.
 [*] [b]Precise Multiplayer Prediction:[/b] No more rubberbanding or "auto-walking"! The movement is perfectly synced and calculated relative to the camera's angle.
 [*] [b]Hybrid Mode (Smart Scope):[/b] Play alongside weapon bases like TFA or CW 2.0 without conflict. The camera seamlessly auto-transitions to first-person when you try to aim.
 [*] [b]Classic Movement Mode:[/b] Prefer standard Garry's Mod controls? Enable the Classic mode setting to lock your player model to the camera direction while retaining the over-the-shoulder view.
@@ -53,6 +54,7 @@ For server owners or power users, all variables can be configured via the consol
 [*] [b]rtp_camera_zoom_fov[/b] - How much FOV to subtract when aiming. Default: 15
 [*] [b]rtp_camera_sens_multiplier[/b] - Multiplier for camera rotation speed. Default: 1.0
 [*] [b]rtp_player_rotation_speed[/b] - Controls how fast the player model turns to match movement. Default: 5
+[*] [b]rtp_aim_rotation_speed[/b] - Smoothness of character rotation while aiming (1 = slow, 20 = responsive). Default: 10
 [*] [b]rtp_player_aiming_button[/b] - Mouse/Keyboard keycode for the aim button. Default: 108
 [*] [b]rtp_toggle_aim[/b] - If 1, clicking the aim button toggles the aiming state. Default: 0
 [*] [b]rtp_smart_scope[/b] - Automatically switches to first-person view while you are aiming (Hybrid mode). Default: 0

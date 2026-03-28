@@ -91,11 +91,6 @@ hook.Add("InputMouseApply", "RTP.InputMouseApply", function(cmd, x, y, ang)
     RTP.State.CameraAngles.yaw = math.NormalizeAngle(RTP.State.CameraAngles.yaw - deltaX)
     RTP.State.CameraAngles.pitch = math.Clamp(RTP.State.CameraAngles.pitch + deltaY, -89, 89)
 
-    -- Lock character rotation to camera direction while aiming
-    if RTP.State.IsAiming then
-        RTP.State.PlayerAngles = Angle(RTP.State.CameraAngles)
-    end
-
     cmd:SetViewAngles(RTP.State.PlayerAngles)
     return true
 end)
@@ -123,6 +118,17 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
         if isSameKey and RTP.State.IsAiming and cmd:KeyDown(IN_ATTACK2) then
             cmd:RemoveKey(IN_ATTACK2)
         end
+    end
+
+    if RTP.State.IsAiming then
+        local aimRotSpeed = RTP_VARS.AIM_ROT_SPEED:GetInt()
+
+        -- Smooth rotation if setting is enabled. 
+        -- aimRotSpeed (1 to 20) acts as tracking speed. Multiply by 0.75 to ensure 20 isn't too sharp.
+        local fraction = math.Clamp(FrameTime() * aimRotSpeed * 0.75, 0.01, 0.99)
+        RTP.State.PlayerAngles = LerpAngle(fraction, RTP.State.PlayerAngles, RTP.State.CameraAngles)
+        
+        cmd:SetViewAngles(RTP.State.PlayerAngles)
     end
 
     -- Important: Invert SideMove. In GMod +SideMove is right,

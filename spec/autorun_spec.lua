@@ -141,6 +141,34 @@ describe("Rotating Third Person Autorun Logic", function()
         assert.spy(cmd.SetSideMove).was.called()
     end)
 
+    it("should smoothly rotate player model towards camera when aiming", function()
+        local ply = LocalPlayer()
+        hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
+
+        _G.RTP_VARS.AIM_ROT_SPEED.value = "10"
+        RTP.State.IsAiming = true
+
+        local cmd = {
+            GetForwardMove = function() return 0 end,
+            GetSideMove = function() return 0 end,
+            SetForwardMove = spy.new(function() end),
+            SetSideMove = spy.new(function() end),
+            KeyDown = function() return false end,
+            SetViewAngles = spy.new(function() end)
+        }
+
+        RTP.State.CameraAngles = Angle(0, 90, 0)
+        RTP.State.PlayerAngles = Angle(0, 0, 0)
+
+        hooks["CreateMove"](cmd)
+
+        -- 0.016 * 10 * 0.75 = 0.12 (12%)
+        -- 12% of 90 degrees = 10.8 degrees
+        assert.is_true(RTP.State.PlayerAngles.yaw > 10.7)
+        assert.is_true(RTP.State.PlayerAngles.yaw < 10.9)
+        assert.spy(cmd.SetViewAngles).was.called_with(cmd, RTP.State.PlayerAngles)
+    end)
+
     it("should block IN_ATTACK2 when aim button and +attack2 bind are the same", function()
         local ply = LocalPlayer()
         hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init

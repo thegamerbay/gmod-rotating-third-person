@@ -76,6 +76,17 @@ _G.Lerp = function(t, a, b)
     return a + (b - a) * t
 end
 
+_G.LerpAngle = function(t, a, b)
+    if type(a) == "table" and type(b) == "table" then
+        return Angle(
+            a.pitch + _G.math.AngleDifference(b.pitch, a.pitch) * t,
+            a.yaw + _G.math.AngleDifference(b.yaw, a.yaw) * t,
+            a.roll + _G.math.AngleDifference(b.roll, a.roll) * t
+        )
+    end
+    return a
+end
+
 _G.FrameTime = function() return 0.016 end
 
 -- Vectors
