@@ -246,17 +246,17 @@ describe("Rotating Third Person Autorun Logic", function()
         local ply = LocalPlayer()
         ply.Crouching = function() return true end
         ply.GetCurrentViewOffset = function() return Vector(0, 0, 28) end -- dropped eye height
-        
+
         _G.RTP_VARS.CAM_FORWARD.value = "0"
         _G.RTP_VARS.CAM_RIGHT.value = "0"
         _G.RTP_VARS.CAM_UP.value = "0"
         _G.RTP_VARS.CROUCH_DROP.value = "20"
-        
-        RTP.State.CurrentCamUp = 0 
+
+        RTP.State.CurrentCamUp = 0
         RTP.State.CameraAngles = Angle(0,0,0)
-        
+
         local view = hooks["CalcView"](ply, Vector(0,0,28), Angle(0,0,0), 90)
-        
+
         -- Base origin should be corrected to 64, then it should lerp down from 0 to -20
         -- New camUp after 1 frame (~0.16 lerp factor) is around -3.2
         -- 64 + (-3.2) = 60.8

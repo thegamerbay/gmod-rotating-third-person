@@ -198,8 +198,8 @@ local function DrawUpSettings()
 end
 
 local function DrawCrouchSettings()
-    Editor.PANEL.CrouchDrop = DrawScratchBlock( 
-        "rtp_ui_crouch_drop", 0, 50, "rtp_camera_crouch_drop", "rtp_tip_crouch_drop" 
+    Editor.PANEL.CrouchDrop = DrawScratchBlock(
+        "rtp_ui_crouch_drop", 0, 50, "rtp_camera_crouch_drop", "rtp_tip_crouch_drop"
     )
 end
 

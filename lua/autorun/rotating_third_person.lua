@@ -150,7 +150,7 @@ hook.Add("CalcView", "RTP.CalcView", function(ply, origin, angles, fov)
 
     local camFwd = RTP_VARS.CAM_FORWARD:GetInt()
     local camRight = RTP_VARS.CAM_RIGHT:GetInt()
-    
+
     local targetCamUp = RTP_VARS.CAM_UP:GetInt()
     if ply:Crouching() then
         -- Subtract the positive drop value so the camera moves down relative to standing
@@ -167,7 +167,7 @@ hook.Add("CalcView", "RTP.CalcView", function(ply, origin, angles, fov)
     local viewZDiff = ply:GetViewOffset().z - ply:GetCurrentViewOffset().z
     local cameraBaseOrigin = origin + Vector(0, 0, viewZDiff)
 
-    -- Trace from true player eyes (origin) to the desired camera spot 
+    -- Trace from true player eyes (origin) to the desired camera spot
     -- to prevent starting the trace inside a ceiling on low ceiling maps.
     local tr = util.TraceHull({
         start = origin,
