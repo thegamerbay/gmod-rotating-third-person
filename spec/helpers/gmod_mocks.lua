@@ -135,7 +135,9 @@ _G.hook = {
 
 -- Input
 _G.input = {
-    IsButtonDown = function(btn) return false end
+    IsButtonDown = function(btn) return false end,
+    GetKeyName = function(btn) return btn == 108 and "MOUSE2" or "UNKNOWN" end,
+    LookupBinding = function(bind) return bind == "+attack2" and "mouse2" or nil end
 }
 
 -- Traces

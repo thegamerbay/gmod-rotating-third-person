@@ -101,9 +101,24 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
     local ply = LocalPlayer()
     if not IsAddonActive(ply) or not RTP.State.Initialized then return end
 
-    -- Block IN_ATTACK2 if we are aiming with Right Mouse Button (108)
-    if RTP_VARS.AIM_BUTTON:GetInt() == 108 and cmd:KeyDown(IN_ATTACK2) then
-        cmd:RemoveKey(IN_ATTACK2)
+    if CLIENT then
+        -- Get the key name from our mod's settings (e.g. "MOUSE2" or "X")
+        local aimBtn = RTP_VARS.AIM_BUTTON:GetInt()
+        local aimKeyName = input.GetKeyName(aimBtn)
+        
+        -- Get the key bound to secondary attack (+attack2) in GMod (e.g. "mouse2")
+        local attack2Bind = input.LookupBinding("+attack2")
+
+        -- Compare them. string.lower is needed because functions might return different cases
+        local isSameKey = false
+        if aimKeyName and attack2Bind then
+            isSameKey = (string.lower(aimKeyName) == string.lower(attack2Bind))
+        end
+
+        -- If it's the same key and the player is actually aiming right now - block IN_ATTACK2
+        if isSameKey and RTP.State.IsAiming and cmd:KeyDown(IN_ATTACK2) then
+            cmd:RemoveKey(IN_ATTACK2)
+        end
     end
 
     -- Important: Invert SideMove. In GMod +SideMove is right,

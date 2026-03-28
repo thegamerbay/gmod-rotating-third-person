@@ -142,12 +142,15 @@ describe("Rotating Third Person Autorun Logic", function()
         assert.spy(cmd.SetSideMove).was.called()
     end)
 
-    it("should block IN_ATTACK2 when aiming with Right Mouse Button", function()
+    it("should block IN_ATTACK2 when aim button and +attack2 bind are the same", function()
         local ply = LocalPlayer()
         hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
 
-        _G.RTP_VARS.AIM_BUTTON.value = "108"
+        _G.RTP_VARS.AIM_BUTTON.value = "108" -- Mock returns MOUSE2
         _G.IN_ATTACK2 = 2048
+        RTP.State.IsAiming = true
+
+        _G.input.LookupBinding = function(bind) return bind == "+attack2" and "mouse2" or nil end
 
         local cmd = {
             GetForwardMove = function() return 0 end,
@@ -161,6 +164,30 @@ describe("Rotating Third Person Autorun Logic", function()
         hooks["CreateMove"](cmd)
 
         assert.spy(cmd.RemoveKey).was.called_with(cmd, _G.IN_ATTACK2)
+    end)
+
+    it("should NOT block IN_ATTACK2 when aim button and +attack2 bind are different", function()
+        local ply = LocalPlayer()
+        hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
+
+        _G.RTP_VARS.AIM_BUTTON.value = "108" -- Mock returns MOUSE2
+        _G.IN_ATTACK2 = 2048
+        RTP.State.IsAiming = true
+
+        _G.input.LookupBinding = function(bind) return bind == "+attack2" and "z" or nil end
+
+        local cmd = {
+            GetForwardMove = function() return 0 end,
+            GetSideMove = function() return 0 end,
+            SetForwardMove = spy.new(function() end),
+            SetSideMove = spy.new(function() end),
+            KeyDown = spy.new(function(self, key) return key == _G.IN_ATTACK2 end),
+            RemoveKey = spy.new(function() end)
+        }
+
+        hooks["CreateMove"](cmd)
+
+        assert.spy(cmd.RemoveKey).was_not.called()
     end)
 
     it("should match pitch and yaw to camera angles in classic movement mode", function()
