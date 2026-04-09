@@ -115,7 +115,8 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
         end
 
         -- If it's the same key and the player is physically pressing the zoom button right now - block IN_ATTACK2
-        -- We check input.IsButtonDown instead of RTP.State.IsAiming to correctly block toggle-off clicks in Toggle Aim mode
+        -- We check input.IsButtonDown instead of RTP.State.IsAiming
+        -- to correctly block toggle-off clicks in Toggle Aim mode
         if isSameKey and input.IsButtonDown(aimBtn) and cmd:KeyDown(IN_ATTACK2) then
             cmd:RemoveKey(IN_ATTACK2)
         end
