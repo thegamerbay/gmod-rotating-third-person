@@ -99,9 +99,8 @@ end)
 -- Create correct movement vectors for multiplayer
 hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
     local ply = LocalPlayer()
-    if not IsAddonActive(ply) or not RTP.State.Initialized then return end
 
-    if CLIENT then
+    if CLIENT and RTP.State.Initialized then
         -- Get the key name from our mod's settings (e.g. "MOUSE2" or "X")
         local aimBtn = RTP_VARS.AIM_BUTTON:GetInt()
         local aimKeyName = input.GetKeyName(aimBtn)
@@ -115,11 +114,14 @@ hook.Add("CreateMove", "RTP.CreateMove", function(cmd)
             isSameKey = (string.lower(aimKeyName) == string.lower(attack2Bind))
         end
 
-        -- If it's the same key and the player is actually aiming right now - block IN_ATTACK2
-        if isSameKey and RTP.State.IsAiming and cmd:KeyDown(IN_ATTACK2) then
+        -- If it's the same key and the player is physically pressing the zoom button right now - block IN_ATTACK2
+        -- We check input.IsButtonDown instead of RTP.State.IsAiming to correctly block toggle-off clicks in Toggle Aim mode
+        if isSameKey and input.IsButtonDown(aimBtn) and cmd:KeyDown(IN_ATTACK2) then
             cmd:RemoveKey(IN_ATTACK2)
         end
     end
+
+    if not IsAddonActive(ply) or not RTP.State.Initialized then return end
 
     if RTP.State.IsAiming then
         local aimRotSpeed = RTP_VARS.AIM_ROT_SPEED:GetInt()

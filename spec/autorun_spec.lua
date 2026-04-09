@@ -175,10 +175,11 @@ describe("Rotating Third Person Autorun Logic", function()
         hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
 
         _G.RTP_VARS.AIM_BUTTON.value = "108" -- Mock returns MOUSE2
+        _G.RTP_VARS.SMART_SCOPE.value = "1" -- Enable Hybrid Mode to verify attack blocking still works
         _G.IN_ATTACK2 = 2048
-        RTP.State.IsAiming = true
 
         _G.input.LookupBinding = function(bind) return bind == "+attack2" and "mouse2" or nil end
+        _G.input.IsButtonDown = function(btn) return btn == 108 end
 
         local cmd = {
             GetForwardMove = function() return 0 end,
@@ -201,9 +202,9 @@ describe("Rotating Third Person Autorun Logic", function()
 
         _G.RTP_VARS.AIM_BUTTON.value = "108" -- Mock returns MOUSE2
         _G.IN_ATTACK2 = 2048
-        RTP.State.IsAiming = true
 
         _G.input.LookupBinding = function(bind) return bind == "+attack2" and "z" or nil end
+        _G.input.IsButtonDown = function(btn) return btn == 108 end
 
         local cmd = {
             GetForwardMove = function() return 0 end,
