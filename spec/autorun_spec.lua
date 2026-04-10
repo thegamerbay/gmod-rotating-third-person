@@ -27,6 +27,7 @@ describe("Rotating Third Person Autorun Logic", function()
         -- Start with Addon Enabled
         _G.RTP_VARS.ENABLED.value = "1"
         _G.RTP_VARS.TRANSITION_SPEED.value = "0"
+        _G.RTP_VARS.BLOCK_ATTACK2.value = "0"
     end)
 
     it("should initialize state on first CalcView", function()
@@ -176,6 +177,7 @@ describe("Rotating Third Person Autorun Logic", function()
 
         _G.RTP_VARS.AIM_BUTTON.value = "108" -- Mock returns MOUSE2
         _G.RTP_VARS.SMART_SCOPE.value = "1" -- Enable Hybrid Mode to verify attack blocking still works
+        _G.RTP_VARS.BLOCK_ATTACK2.value = "1" -- Enable blocking explicitly
         _G.IN_ATTACK2 = 2048
 
         _G.input.LookupBinding = function(bind) return bind == "+attack2" and "mouse2" or nil end
@@ -194,6 +196,32 @@ describe("Rotating Third Person Autorun Logic", function()
         hooks["CreateMove"](cmd)
 
         assert.spy(cmd.RemoveKey).was.called_with(cmd, _G.IN_ATTACK2)
+    end)
+
+    it("should NOT block IN_ATTACK2 when rtp_block_attack2_on_aim is 0", function()
+        local ply = LocalPlayer()
+        hooks["CalcView"](ply, Vector(0,0,0), Angle(0,0,0), 90) -- init
+
+        _G.RTP_VARS.AIM_BUTTON.value = "108" -- Mock returns MOUSE2
+        _G.RTP_VARS.BLOCK_ATTACK2.value = "0"
+        _G.IN_ATTACK2 = 2048
+
+        _G.input.LookupBinding = function(bind) return bind == "+attack2" and "mouse2" or nil end
+        _G.input.IsButtonDown = function(btn) return btn == 108 end
+
+        local cmd = {
+            GetForwardMove = function() return 0 end,
+            GetSideMove = function() return 0 end,
+            SetForwardMove = spy.new(function() end),
+            SetSideMove = spy.new(function() end),
+            KeyDown = spy.new(function(self, key) return key == _G.IN_ATTACK2 end),
+            RemoveKey = spy.new(function() end),
+            SetViewAngles = spy.new(function() end)
+        }
+
+        hooks["CreateMove"](cmd)
+
+        assert.spy(cmd.RemoveKey).was_not.called()
     end)
 
     it("should NOT block IN_ATTACK2 when aim button and +attack2 bind are different", function()

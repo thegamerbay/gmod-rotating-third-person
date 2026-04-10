@@ -1,4 +1,4 @@
-> 🌐 **Languages:** [English](README.md) | [Русский](README.ru.md) | [ไทย](README.th.md) | [简体中文](README.zh-CN.md)
+> 🌐 **Languages:** [English](README.md) | [Русский](assets/README.ru.md) | [ไทย](assets/README.th.md) | [简体中文](assets/README.zh.md)
 
 <div align="center">
   <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
@@ -91,6 +91,7 @@ For server owners or power users, all variables can be configured via the consol
 | `rtp_player_aiming_button` | Mouse/Keyboard keycode for the aim button. | `108` |
 | `rtp_toggle_aim` | If 1, clicking the aim button toggles the aiming state. | `0` |
 | `rtp_smart_scope` | Automatically switches to first-person view while you are aiming (Hybrid mode). | `0` |
+| `rtp_block_attack2_on_aim` | Prevents firing the weapon's secondary attack while aiming in third person. | `0` |
 | `rtp_invert_y` | Inverts the vertical mouse pitch rotation. | `0` |
 | `rtp_crosshair_hidden_if_not_aiming` | Hides the default crosshair while not aiming. | `0` |
 | `rtp_classic_movement_mode` | Enables Classic movement mode: locks model rotation to camera direction. | `0` |

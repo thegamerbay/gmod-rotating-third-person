@@ -1,5 +1,5 @@
 local PANEL_WIDTH = 350
-local PANEL_HEIGHT = 740
+local PANEL_HEIGHT = 770
 local PANEL_TITLE = "Third Person Rotating Camera"
 local ELEMENTS_HEIGHT = 30
 
@@ -381,6 +381,9 @@ local function ResetSettings()
     RunConsoleCommand( "rtp_smart_scope", "0" )
     Editor.PANEL.IsSmartScope:SetValue( false )
 
+    RunConsoleCommand( "rtp_block_attack2_on_aim", "0" )
+    Editor.PANEL.IsBlockAttack2:SetValue( false )
+
     RunConsoleCommand( "rtp_invert_y", "0" )
     Editor.PANEL.IsInvertY:SetValue( false )
 
@@ -418,6 +421,9 @@ local function DrawCheckboxes()
     )
     Editor.PANEL.IsSmartScope = DrawCheckBox(
         "rtp_ui_smart_scope", "rtp_smart_scope", "rtp_tip_smart_scope"
+    )
+    Editor.PANEL.IsBlockAttack2 = DrawCheckBox(
+        "rtp_ui_block_attack2", "rtp_block_attack2_on_aim", "rtp_tip_block_attack2"
     )
     Editor.PANEL.IsInvertY = DrawCheckBox(
         "rtp_ui_invert_y", "rtp_invert_y", "rtp_tip_invert_y"

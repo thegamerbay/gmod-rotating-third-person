@@ -1,7 +1,7 @@
 > 🌐 **Languages:** [English](README.md) | [Русский](README.ru.md) | [ไทย](README.th.md) | [简体中文](README.zh-CN.md)
 
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
+  <img src="../materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>第三人称旋转摄像机</h1>
   <p><b>一款高度可定制的 Garry's Mod 越肩视角摄像机插件，灵感来源于游戏《Haydee》。</b></p>
   
@@ -56,7 +56,7 @@
 4. 设置你偏好的瞄准按键（默认为鼠标右键）。
 5. 直接通过复选框启用或禁用诸如切换瞄准、混合模式 (Smart Scope) 和 Y轴反转等新特性。
 
-![Settings Menu](assets/settings.jpg)
+![Settings Menu](settings.jpg)
 
 ### 快速快捷键
 你可以直接在开发者控制台（`~`）中绑定实用功能：
@@ -91,6 +91,7 @@ bind v "rtp_switch_shoulder"
 | `rtp_player_aiming_button` | 瞄准按键的鼠标/键盘键码。 | `108` |
 | `rtp_toggle_aim` | 若为 1，点击瞄准键将切换瞄准状态。 | `0` |
 | `rtp_smart_scope` | 瞄准时自动切换到第一人称视角（混合模式）。 | `0` |
+| `rtp_block_attack2_on_aim` | 防止在第三人称瞄准时发射武器的次要攻击。 | `0` |
 | `rtp_invert_y` | 反转鼠标垂直俯仰旋转。 | `0` |
 | `rtp_crosshair_hidden_if_not_aiming` | 非瞄准状态下隐藏默认准星。 | `0` |
 | `rtp_classic_movement_mode` | 启用经典移动模式：将模型旋转锁定为摄像机方向。 | `0` |

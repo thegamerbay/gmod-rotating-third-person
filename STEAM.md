@@ -30,7 +30,7 @@ Customize the camera in real-time without typing any commands!
 [*] [b]2.[/b] Click on the [b]Third Person Rotating Camera[/b] icon (usually located on the top bar or under a dedicated tab).
 [*] [b]3.[/b] Adjust the sliders for Camera Distance, Up/Down, Right/Left, and FOV.
 [*] [b]4.[/b] Set your preferred Aiming button (default is Right Mouse Button - 108).
-[*] [b]5.[/b] Enable or disable new features like Toggle Aim, Hybrid Mode (Smart Scope), Classic movement, and Invert Y-Axis directly via checkboxes.
+[*] [b]5.[/b] Enable or disable new features like Toggle Aim, Hybrid Mode (Smart Scope), Classic movement, Block Alt-Fire, and Invert Y-Axis directly via checkboxes.
 [/list]
 
 [h3]Quick Keybinds[/h3]
@@ -60,6 +60,7 @@ For server owners or power users, all variables can be configured via the consol
 [*] [b]rtp_player_aiming_button[/b] - Mouse/Keyboard keycode for the aim button. Default: 108
 [*] [b]rtp_toggle_aim[/b] - If 1, clicking the aim button toggles the aiming state. Default: 0
 [*] [b]rtp_smart_scope[/b] - Automatically switches to first-person view while you are aiming (Hybrid mode). Default: 0
+[*] [b]rtp_block_attack2_on_aim[/b] - Prevents firing the weapon's secondary attack while aiming in third person. Default: 0
 [*] [b]rtp_invert_y[/b] - Inverts the vertical mouse pitch rotation. Default: 0
 [*] [b]rtp_crosshair_hidden_if_not_aiming[/b] - Hides the default crosshair while not aiming. Default: 0
 [*] [b]rtp_classic_movement_mode[/b] - Enables Classic movement mode: locks model rotation to camera direction. Default: 0

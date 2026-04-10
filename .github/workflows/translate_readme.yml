@@ -24,9 +24,10 @@ jobs:
         with:
           api_key: ${{ secrets.GEMINI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          languages: 'ru, th, zh-CN'
+          languages: 'ru, th, zh, es, ar'
+          output_dir: 'assets'
           add_language_menu: 'true'
-          menu_style: '> 🌐 **Languages:** [English](README.md) | [Русский](README.ru.md)'
+          menu_style: '> 🌐 **Languages:** [English](README.md) | [Русский](assets/README.ru.md)'
 
       - name: Print Translation Stats
         run: |

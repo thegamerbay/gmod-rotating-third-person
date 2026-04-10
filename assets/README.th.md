@@ -1,7 +1,7 @@
 > 🌐 **Languages:** [English](README.md) | [Русский](README.ru.md) | [ไทย](README.th.md) | [简体中文](README.zh-CN.md)
 
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
+  <img src="../materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>Third Person Rotating Camera</h1>
   <p><b>มุมกล้องแบบมองข้ามไหล่สำหรับ Garry's Mod ที่ปรับแต่งได้อย่างอิสระ ได้รับแรงบันดาลใจจาก Haydee</b></p>
   
@@ -56,7 +56,7 @@
 4. ตั้งค่าปุ่มเล็ง (Aiming) ตามที่คุณถนัด (ค่าเริ่มต้นคือ คลิกขวา)
 5. เปิดหรือปิดใช้งานฟีเจอร์ต่างๆ เช่น Toggle Aim, Hybrid Mode (Smart Scope) และ Invert Y-Axis ได้โดยตรงผ่านช่องทำเครื่องหมาย (Checkbox)
 
-![Settings Menu](assets/settings.jpg)
+![Settings Menu](settings.jpg)
 
 ### การตั้งปุ่มลัด (Keybinds)
 คุณสามารถตั้งปุ่มสำหรับฟังก์ชันที่มีประโยชน์ผ่านคอนโซลนักพัฒนา (`~`) ได้โดยตรง:
@@ -91,6 +91,7 @@ bind v "rtp_switch_shoulder"
 | `rtp_player_aiming_button` | รหัสปุ่มเมาส์/คีย์บอร์ดสำหรับปุ่มเล็ง | `108` |
 | `rtp_toggle_aim` | หากเป็น 1, การคลิกปุ่มเล็งจะเป็นการเปิด/ปิดโหมดเล็ง | `0` |
 | `rtp_smart_scope` | สลับเป็นมุมมองบุคคลที่หนึ่งโดยอัตโนมัติขณะที่คุณกำลังเล็ง (โหมดไฮบริด) | `0` |
+| `rtp_block_attack2_on_aim` | ป้องกันการยิงการโจมตีรองของอาวุธขณะเล็งในมุมมองบุคคลที่สาม | `0` |
 | `rtp_invert_y` | สลับแกนการก้มเงยเมาส์แนวตั้ง | `0` |
 | `rtp_crosshair_hidden_if_not_aiming` | ซ่อนเป้าเล็งเริ่มต้นขณะที่ไม่ได้เล็ง | `0` |
 | `rtp_classic_movement_mode` | เปิดโหมดเคลื่อนไหวแบบคลาสสิก: ล็อกการหมุนโมเดลให้หันตามทิศทางกล้อง | `0` |
