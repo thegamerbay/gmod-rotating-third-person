@@ -1,4 +1,4 @@
-> 🌐 **Languages:** [English](README.md) | [Русский](assets/README.ru.md) | [ไทย](assets/README.th.md) | [简体中文](assets/README.zh.md)
+> 🌐 **Languages:** [English](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/README.md) | [Русский](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ru.md) | [ไทย](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.th.md) | [简体中文](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.zh.md) | [Español](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.es.md) | [العربية](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ar.md)
 
 <div align="center">
   <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
