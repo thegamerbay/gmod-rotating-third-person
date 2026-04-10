@@ -1,7 +1,7 @@
 > 🌐 **اللغات:** [English](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/README.md) | [Русский](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ru.md) | [ไทย](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.th.md) | [简体中文](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.zh.md) | [Español](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.es.md) | [العربية](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ar.md)
 
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
+  <img src="https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>كاميرا المنظور الثالث الدوارة</h1>
   <p><b>كاميرا منظور فوق الكتف قابلة للتخصيص بشكل كبير للعبة Garry's Mod، مستوحاة من لعبة Haydee.</b></p>
   
@@ -56,7 +56,7 @@
 4. قم بتعيين زر التصويب المفضل لديك (الافتراضي هو الزر الأيمن للماوس).
 5. قم بتمكين أو تعطيل الميزات الجديدة مثل تبديل التصويب (Toggle Aim)، والوضع الهجين (التصويب الذكي)، وعكس المحور الصادي (Invert Y-Axis) مباشرة عبر مربعات الاختيار.
 
-![Settings Menu](assets/settings.jpg)
+![Settings Menu](https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/assets/settings.jpg)
 
 ### اختصارات لوحة المفاتيح السريعة
 يمكنك تعيين وظائف مفيدة مباشرة في وحدة تحكم المطورين (`~`):

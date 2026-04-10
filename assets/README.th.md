@@ -1,7 +1,7 @@
 > 🌐 **Languages:** [English](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/README.md) | [Русский](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ru.md) | [ไทย](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.th.md) | [简体中文](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.zh.md) | [Español](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.es.md) | [العربية](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ar.md)
 
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
+  <img src="https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>Third Person Rotating Camera</h1>
   <p><b>ม็อดกล้องข้ามไหล่ที่สามารถปรับแต่งได้สูงสำหรับ Garry's Mod ซึ่งได้รับแรงบันดาลใจจากเกม Haydee</b></p>
   
@@ -56,7 +56,7 @@
 4. ตั้งค่าปุ่มสำหรับการเล็งตามที่คุณถนัด (ค่าเริ่มต้นคือปุ่มคลิกขวา)
 5. เปิดหรือปิดใช้งานฟีเจอร์ใหม่ ๆ เช่น Toggle Aim, โหมดไฮบริด (Smart Scope) และการกลับแกน Y ผ่านช่องทำเครื่องหมายได้โดยตรง
 
-![Settings Menu](assets/settings.jpg)
+![Settings Menu](https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/assets/settings.jpg)
 
 ### ปุ่มลัดด่วน
 คุณสามารถตั้งค่าปุ่มสำหรับฟังก์ชันที่มีประโยชน์ได้โดยตรงในคอนโซลนักพัฒนา (`~`):

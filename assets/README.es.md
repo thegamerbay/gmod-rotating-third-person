@@ -1,7 +1,7 @@
 > 🌐 **Idiomas:** [English](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/README.md) | [Русский](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ru.md) | [ไทย](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.th.md) | [简体中文](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.zh.md) | [Español](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.es.md) | [العربية](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ar.md)
 
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
+  <img src="https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>Cámara Rotativa en Tercera Persona</h1>
   <p><b>Una cámara sobre el hombro altamente personalizable para Garry's Mod, inspirada en Haydee.</b></p>
   
@@ -56,7 +56,7 @@ Ya sea que estés jugando en el modo sandbox o explorando mapas, este addon ofre
 4. Establece tu botón de apuntado preferido (por defecto es el botón derecho del ratón).
 5. Activa o desactiva nuevas funciones como Alternar apuntado, Modo híbrido (Apuntado Inteligente) e Invertir eje Y directamente mediante casillas de verificación.
 
-![Settings Menu](assets/settings.jpg)
+![Settings Menu](https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/assets/settings.jpg)
 
 ### Atajos de teclado rápidos
 Puedes asignar funciones útiles directamente desde la consola de desarrollador (`~`):

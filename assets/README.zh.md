@@ -1,7 +1,7 @@
 > 🌐 **语言:** [English](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/README.md) | [Русский](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ru.md) | [ไทย](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.th.md) | [简体中文](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.zh.md) | [Español](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.es.md) | [العربية](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ar.md)
 
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
+  <img src="https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>第三人称旋转摄像机</h1>
   <p><b>一款为《盖瑞模组》(Garry's Mod) 打造的高度可定制的越肩视角摄像机，灵感来源于游戏《Haydee》。</b></p>
   
@@ -56,7 +56,7 @@
 4. 设置您偏好的瞄准按键（默认为鼠标右键）。
 5. 直接通过复选框启用或禁用切换瞄准、混合模式 (智能开镜) 以及反转 Y 轴等新功能。
 
-![Settings Menu](assets/settings.jpg)
+![Settings Menu](https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/assets/settings.jpg)
 
 ### 快捷键绑定
 您可以在开发者控制台 (`~`) 中直接绑定实用的功能：

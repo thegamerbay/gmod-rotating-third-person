@@ -1,7 +1,7 @@
 > 🌐 **Языки:** [English](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/README.md) | [Русский](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ru.md) | [ไทย](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.th.md) | [简体中文](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.zh.md) | [Español](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.es.md) | [العربية](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ar.md)
 
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
+  <img src="https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>Вращающаяся камера от третьего лица</h1>
   <p><b>Тонко настраиваемая камера из-за плеча для Garry's Mod, вдохновленная игрой Haydee.</b></p>
   
@@ -56,7 +56,7 @@
 4. Назначьте удобную кнопку прицеливания (по умолчанию — правая кнопка мыши).
 5. Включайте или отключайте новые функции, такие как переключение прицеливания, гибридный режим (умный прицел) и инверсия оси Y, напрямую с помощью галочек.
 
-![Settings Menu](assets/settings.jpg)
+![Settings Menu](https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/assets/settings.jpg)
 
 ### Быстрые привязки клавиш (Бинды)
 Вы можете привязать полезные функции к клавишам напрямую в консоли разработчика (`~`):

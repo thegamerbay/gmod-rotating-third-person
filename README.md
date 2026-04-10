@@ -1,7 +1,7 @@
 > 🌐 **Languages:** [English](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/README.md) | [Русский](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ru.md) | [ไทย](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.th.md) | [简体中文](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.zh.md) | [Español](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.es.md) | [العربية](https://github.com/thegamerbay/gmod-rotating-third-person/blob/master/assets/README.ar.md)
 
 <div align="center">
-  <img src="materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
+  <img src="https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/materials/icon/rotating_third_person.png" alt="Logo" width="256" height="256">
   <h1>Third Person Rotating Camera</h1>
   <p><b>A highly customizable over-the-shoulder camera for Garry's Mod, inspired by Haydee.</b></p>
   
@@ -56,7 +56,7 @@ Customize the camera in real-time without typing any commands!
 4. Set your preferred Aiming button (default is Right Mouse Button).
 5. Enable or disable new features like Toggle Aim, Hybrid Mode (Smart Scope), and Invert Y-Axis directly via checkboxes.
 
-![Settings Menu](assets/settings.jpg)
+![Settings Menu](https://raw.githubusercontent.com/thegamerbay/gmod-rotating-third-person/master/assets/settings.jpg)
 
 ### Quick Keybinds
 You can bind useful functions directly in the developer console (`~`):
