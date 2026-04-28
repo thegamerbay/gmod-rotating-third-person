@@ -18,7 +18,7 @@ jobs:
           luaVersion: "5.1.5"
 
       - name: Setup Luarocks
-        uses: leafo/gh-actions-luarocks@v6.0.0
+        uses: leafo/gh-actions-luarocks@v6.1.0
 
       - name: Install Luacheck
         run: luarocks install luacheck
